@@ -11,7 +11,7 @@
 ![image](https://imgur.com/qfZ5uv5.jpg)
 ![image](https://imgur.com/6qo4N2V.jpg)
 
-### 會員功能
+## 會員功能:
 前台
 *使用者可以註冊帳號(具驗證格式、如有相同帳號也無法註冊、密碼會經由雜湊存取至資料庫)，註冊後即可收到啟動信，點擊連結後啟動成功。
 *使用者可以登入帳號(可編輯會員資訊、可查看訂單、購物車)。
@@ -24,8 +24,8 @@
 ![image](https://imgur.com/n34uyQt.jpg)
 ![image](https://imgur.com/8T8a5Ix.jpg)
 
-### 調整輪播功能
-後台
+## 調整輪播功能
+*後台
 *後台人員可以調整前台畫面的輪播資訊。(使用API來做畫面呈現)
 
 ![image](https://imgur.com/al0RQOI.jpg)
@@ -33,5 +33,5 @@
 
 
 ## 測試用帳號
-Account:allen
-password:allen
+*Account:allen
+*password:allen
