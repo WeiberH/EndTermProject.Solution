@@ -1,4 +1,4 @@
-![image](https://github.com/WeiberH/EndTermProject.Solution/assets/144783224/5e757b40-699d-484b-8766-e06d4d98d01f)# RWD響應式購物網站(搭配CRUD功能)
+# RWD響應式購物網站(搭配CRUD功能)
 
 ## 專案說明 (Project Title)：
 以ASP.NET MVC開發環境來建立購物網站，其網站內含會員系統、商品清單、篩選、購物車 等相關功能，
