@@ -1,0 +1,174 @@
+﻿@model EndTermProjectBack.Models.EFModels.Product
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<style>
+    body {
+        font-family: 'Lato', 'Arial', sans-serif;
+        font-size: 16px;
+        color: #555;
+    }
+
+    .container {
+        background-color: #fff;
+        padding: 5px 20px;
+    }
+
+    .btn-primary {
+        background-color: #2c3e50;
+        border: none;
+        color: #fff;
+    }
+
+    .btn-danger {
+        background-color: #c0392b;
+        border: none;
+        color: #fff;
+    }
+
+    .btn-sm {
+        padding: 8px 10x;
+        font-size: 14px;
+    }
+
+    .table {
+        background-color: #fff;
+    }
+
+    .btn-container {
+        display: inline-block;
+    }
+
+    .btn-container {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+</style>
+
+<h5>你確定要刪除此商品？</h5>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <div class="row">
+            <div class="col-lg-6 mb-3">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+            </div>
+
+            <div class="col-lg-2 mb-3">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Price)
+                </dd>
+            </div>
+
+            <div class="col-lg-2 mb-3">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Stock)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Stock)
+                </dd>
+            </div>
+
+            <div class="col-lg-2 mb-3">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Enabled)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Enabled)
+                </dd>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 mb-3">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Brand.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Brand.Name)
+                </dd>
+            </div>
+
+            <div class="col-lg-3 mb-3">
+                <dt>
+                    @Html.DisplayNameFor(model => model.SecondaryCategory.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SecondaryCategory.Name)
+                </dd>
+            </div>
+
+            <div class="col-lg-3 mb-3">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Note.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Note.Name)
+                </dd>
+            </div>
+
+            <div class="col-lg-3 mb-3">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Capacity.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Capacity.Name)
+                </dd>
+            </div>
+        </div>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Method)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Method)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ingredient)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ingredient)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="mb-3 d-flex justify-content-center mt-5">
+            <input type="submit" value="確定刪除" class="btn btn-danger me-5" />
+            @Html.ActionLink("回上一頁", "Index", null, new { @class = "btn btn-primary" })
+        </div>
+    }
+</div>

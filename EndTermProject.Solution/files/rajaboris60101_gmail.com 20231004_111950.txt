@@ -1,0 +1,7 @@
+﻿from:rajaboris60101@gmail.com
+to:rajaboris60101@gmail.com
+subject:[帳號開通通知信]
+
+Hi 黃柏崴,
+<br />
+請點擊此連結 [<a href='https://localhost:44355/Members/ActiveRegister?memberid=32&confirmCode=bd050231ad7e4b16b6926ea231812e4e' target='_blank'>來啟動開通帳號</a>], 如果您已經開通, 請忽略本信, 謝謝

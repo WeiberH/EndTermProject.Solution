@@ -1,0 +1,7 @@
+﻿from:rajaboris60101@gmail.com
+to:ChenYu@yahoo.com.tw
+subject:[重設密碼通知]
+
+Hi 許冠華,
+<br />
+請點擊此連結 [<a href='https://localhost:44355/Members/ResetPassword?memberid=40&confirmCode=c7c6bc225bc142d79553be3a5ddf4b41' target='_blank'>我要重設密碼</a>], 以進行重設密碼, 如果您沒有提出申請, 請忽略本信, 謝謝

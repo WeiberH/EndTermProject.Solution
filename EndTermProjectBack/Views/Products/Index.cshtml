@@ -1,0 +1,266 @@
+﻿@model IEnumerable<EndTermProjectBack.Models.EFModels.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+    body {
+        font-family: 'Lato', 'Arial', sans-serif;
+        font-size: 16px;
+        color: #555;
+    }
+
+    .container {
+        background-color: #fff;
+        padding: 5px 20px;
+    }
+
+    .btn-primary {
+        background-color: #2c3e50;
+        border: none;
+        color: #fff;
+    }
+
+    .btn-danger {
+        background-color: #c0392b;
+        border: none;
+        color: #fff;
+    }
+
+    .btn-sm {
+        padding: 8px 10x;
+        font-size: 14px;
+    }
+
+    .table {
+        background-color: #fff;
+    }
+
+        .table thead th {
+            text-align: center;
+            vertical-align: middle;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+    table td {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .btn-container {
+        display: inline-block;
+    }
+
+    .pagination .page-link {
+        color: #333;
+        background-color: #fff;
+        border: 2px solid #d1d1d1;
+    }
+
+    .pagination .page-item.active .page-link {
+        color: #333;
+        background-color: #fff;
+        border-color: #b0b0b0;
+    }
+
+    .pagination .page-item.disabled .page-link {
+        color: #aaa;
+        pointer-events: none;
+        background-color: #fff;
+        border: 2px solid #d1d1d1;
+    }
+
+    .btn-container {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .pagination .previous-link {
+        border-top-left-radius: 0.4rem;
+        border-bottom-left-radius: 0.4rem;
+    }
+
+    .pagination .next-link {
+        border-top-right-radius: 0.4rem;
+        border-bottom-right-radius: 0.4rem;
+    }
+</style>
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">首頁</a></li>
+            <li class="breadcrumb-item active" aria-current="page">商品管理</li>
+            <li class="breadcrumb-item active" aria-current="page">商品總覽</li>
+        </ol>
+    </nav>
+</div>
+<hr />
+
+<!-- 動作成功的提示 -->
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" id="successMessage">
+        @TempData["SuccessMessage"].ToString()
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                $('#successMessage').fadeOut('slow');
+            }, 2000); // 2000 milliseconds = 2 seconds
+        });
+    </script>
+}
+<!-- 動作成功的提示 -->
+<!-- Begin Search Form -->
+@using (Html.BeginForm("Search", "Products", FormMethod.Get))
+{
+    <div class="row">
+        <div class="form-group col-md-2">
+            <label for="productName">品名</label>
+            <div class="d-flex align-items-end">
+                <input type="text" id="productName" name="productName" value="@ViewBag.ProductName" placeholder="-- 輸入品名 --" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group col-md-2">
+            <label for="brandId">品牌</label>
+            <div class="d-flex align-items-end">
+                @Html.DropDownList("brandId", (IEnumerable<SelectListItem>)ViewBag.BrandsList, "-- 選擇全部 --", new { @class = "form-select", @id = "brandId" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-2">
+            <label for="categoryId">品類</label>
+            <div class="d-flex align-items-end">
+                @Html.DropDownList("categoryId", (IEnumerable<SelectListItem>)ViewBag.CategoriesList, "-- 選擇全部 --", new { @class = "form-select", @id = "categoryId" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-2">
+            <label for="noteId">香調</label>
+            <div class="d-flex align-items-end">
+                @Html.DropDownList("noteId", (IEnumerable<SelectListItem>)ViewBag.NotesList, "-- 選擇全部 --", new { @class = "form-select", @id = "noteId" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-2">
+            <label>&nbsp;</label>  <!-- 空的label保持空间 -->
+            <div class="d-flex align-items-end">
+                <button type="submit" class="btn btn-primary">搜尋</button>
+            </div>
+        </div>
+
+        <div class="form-group col-md-2">
+            <label>&nbsp;</label>  <!-- 空的label保持空间 -->
+            <div class="d-flex align-items-end">
+                @Html.ActionLink("+新增商品", "Create", null, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+}
+<!-- End Search Form -->
+
+<table class="table table-bordered table-hover mt-4">
+    <thead class="table-light">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Enabled)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SecondaryCategory.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Note.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Capacity.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Enabled)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SecondaryCategory.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Capacity.Name)
+            </td>
+            <td>
+                <div class="btn-container">
+                    @Html.ActionLink("編輯", "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                    @Html.ActionLink("查看", "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                    @Html.ActionLink("刪除", "Delete", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<nav aria-label="...">
+    <ul class="pagination d-flex justify-content-center mt-3"
+        <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+            <a class="page-link previous-link" href="@Url.Action("Search", "Products", new { productName = ViewBag.ProductName, brandId = ViewBag.BrandIdValue, categoryId = ViewBag.CategoryIdValue, noteId = ViewBag.NoteIdValue, page = ViewBag.CurrentPage - 1 })">Previous</a>
+        </li>
+
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                <a class="page-link" href="@Url.Action("Search", "Products", new { productName = ViewBag.ProductName, brandId = ViewBag.BrandIdValue, categoryId = ViewBag.CategoryIdValue, noteId = ViewBag.NoteIdValue, page = i })">@i</a>
+
+            </li>
+        }
+
+        <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
+            <a class="page-link next-link" href="@Url.Action("Search", "Products", new { productName = ViewBag.ProductName, brandId = ViewBag.BrandIdValue, categoryId = ViewBag.CategoryIdValue, noteId = ViewBag.NoteIdValue, page = ViewBag.CurrentPage + 1 })">Next</a>
+        </li>
+    </ul>
+</nav>
+
+

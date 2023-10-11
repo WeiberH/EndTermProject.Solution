@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "AboutUs";
+}
+
+<style>
+    .about p {
+        font-size: larger;
+    }
+
+    #picture {
+        object-fit: cover;
+        object-position: center;
+        height: 300px;
+        margin-top: 5px;
+    }
+
+    .perspective {
+        margin-left: 15px;
+        font-size: larger;
+        line-height: 40px;
+        text-align: justify;
+    }
+
+
+    h2 {
+        font-weight: bold;
+        text-align: center;
+    }
+
+    h3 {
+        text-align: center;
+    }
+</style>
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">首頁</a></li>
+            <li class="breadcrumb-item active" aria-current="page">關於我們</li>
+            <li class="breadcrumb-item active" aria-current="page">認識Nature</li>
+        </ol>
+    </nav>
+</div>
+<hr />
+
+<div class="container about">
+    <div class="row">
+        <h2 style="margin-top: 20px">Rivers Remedies</h2>
+        <div>
+            <p>
+                歡迎來到 Rivers
+                Remedies!我們是一家專注於提供優質香氛、護手霜、精油等產品的公司。我們的使命是為您的生活增添幸福、平靜和健康，這一使命體現在我們的產品中，每一個細節都充滿愛與關懷。
+            </p>
+            <p>
+                Rivers Remedies 於 2007
+                年成立，當時我們的創始人決定追求一個夢想：將大自然的恩賜轉化為讓人感到愉悅和滿足的產品。我們深信，大自然提供了豐富的資源，可以為人們提供身心靈上的滋養。因此，我們開始研發各種香氛、護手霜、精油等商品，旨在幫助人們實現內外平衡。
+            </p>
+        </div>
+    </div>
+    <div class="row" style="border-top: none">
+        <img src="~/Images/AboutUs.jpg"
+             alt=""
+             id="picture" />
+    </div>
+    <div class="row">
+        <h3 style="margin-top: 20px">我們的價值觀</h3>
+        <div>
+            <ol class="perspective">
+                <li>
+                    品質至上：我們堅守品質的承諾，只使用最優質的原材料，確保我們的產品總是令人滿意。
+                </li>
+                <li>
+                    可持續發展：我們深知大自然的價值，因此我們努力減少對環境的影響，並支持可持續農業和生產實踐。
+                </li>
+                <li>
+                    客戶滿意：客戶是我們成功的關鍵。我們努力滿足客戶的需求，提供卓越的客戶服務。
+                </li>
+                <li>
+                    創新和創造力：我們鼓勵創新思維和創造力，以不斷改進和擴展我們的產品線。
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <h3 style="margin-top: 20px">聯絡我們</h3>
+        <p style="margin-top: 10px">
+            無論您是在尋找放鬆的香氛、護理您的皮膚，還是探索大自然的奧秘，Rivers
+            Remedies
+            都有適合您的產品。如果您有任何問題、建議或合作提議，請隨時聯絡我們。我們的團隊將樂意協助您。
+            感謝您選擇 Rivers
+            Remedies，我們期待能夠成為您生活中的一部分，為您帶來幸福和健康。
+            讓我們一起享受大自然的恩賜，並共同探索身心靈的平衡之道！
+        </p>
+        <p>
+            希望這篇文章能夠幫助您更好地了解 Rivers Remedies
+            以及我們的價值觀和產品。如果您需要進一步的信息或修改，請隨時告訴我，我將樂意為您提供幫助。
+        </p>
+    </div>
+</div>

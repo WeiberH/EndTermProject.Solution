@@ -1,0 +1,75 @@
+﻿@model EndTermProjectBack.Models.EFModels.BannerCarousel
+
+@{
+    ViewBag.Title = "CreateBannerCarousel";
+}
+
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">首頁</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">前台頁面調整</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("BannerCarousel", "Carousel")">Banner輪播</a></li>
+            <li class="breadcrumb-item active" aria-current="page">新增</li>
+        </ol>
+    </nav>
+</div>
+<hr />
+
+
+@using (Html.BeginForm("CreateBannerCarousel", "Carousel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Headline, "標題", htmlAttributes: new { @class = "form-label col-md-2" })
+            @Html.EditorFor(model => model.Headline, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Headline, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="mb-3">
+            @Html.Label("圖片", htmlAttributes: new { @class = "form-label col-md-2" })
+            <input type="file" name="ImageFile" id="ImageFile" class="form-control" />
+        </div>
+
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Description, "內容", htmlAttributes: new { @class = "form-label col-md-2" })
+            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", style = "width:100%" }) <!-- 使用 Bootstrap 的 form-control 類設置 textarea 的樣式 -->
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Enabled, "啟用狀態", htmlAttributes: new { @class = "form-label col-md-2" })
+            <div class="checkbox">
+                @Html.EditorFor(model => model.Enabled)
+                @Html.ValidationMessageFor(model => model.Enabled, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="text-end">
+                <a href="@Url.Action("BannerCarousel", "Carousel")" class="btn btn-primary">上一頁</a>
+                <input type="submit" value="確認" class="btn btn-primary" onclick="showSuccessAlert()" />
+            </div>
+        </div>
+    </div>
+}
+<script>
+    function showSuccessAlert() {
+        alert('新增成功');
+    }
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

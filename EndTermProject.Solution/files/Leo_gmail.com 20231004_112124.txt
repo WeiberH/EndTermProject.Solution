@@ -1,0 +1,7 @@
+﻿from:rajaboris60101@gmail.com
+to:Leo@gmail.com
+subject:[帳號開通通知信]
+
+Hi 江孟霖,
+<br />
+請點擊此連結 [<a href='https://localhost:44355/Members/ActiveRegister?memberid=33&confirmCode=4facdc2b86464892b6889bc4578926d0' target='_blank'>來啟動開通帳號</a>], 如果您已經開通, 請忽略本信, 謝謝

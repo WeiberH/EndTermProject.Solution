@@ -1,0 +1,7 @@
+﻿from:rajaboris60101@gmail.com
+to:ChenYu@yahoo.com.tw
+subject:[帳號開通通知信]
+
+Hi 許冠華,
+<br />
+請點擊此連結 [<a href='https://localhost:44355/Members/ActiveRegister?memberid=40&confirmCode=6ef4371f79724be79a0bb929908ac899' target='_blank'>來啟動開通帳號</a>], 如果您已經開通, 請忽略本信, 謝謝

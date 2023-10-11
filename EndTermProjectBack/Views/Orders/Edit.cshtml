@@ -1,0 +1,72 @@
+﻿@model EndTermProjectBack.Models.ViewModels.OrderStatusVm
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Receiver, htmlAttributes: new { @class = "form-labelcol-md-2" })
+                @Html.EditorFor(model => model.Receiver, new { htmlAttributes = new { @class = "form-control",@readonly = "readonly", @disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.Receiver, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Telephone, htmlAttributes: new { @class = "form-labelcol-md-2" })
+                @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "form-labelcol-md-2" })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "form-labelcol-md-2" })
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.OrderTime, htmlAttributes: new { @class = "form-labelcol-md-2" })
+                @Html.EditorFor(model => model.OrderTime, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" ,@disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.OrderTime, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Paytype, htmlAttributes: new { @class = "form-labelcol-md-2" })
+                @Html.EditorFor(model => model.Paytype, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.Paytype, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "form-labelcol-md-2" })
+            @Html.DropDownList("statusId", ViewBag.StatusId as SelectList, "",new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            <div class="text-end">
+                <input type="submit" value="更新" class="btn btn-danger" />
+                <a href="@Url.Action("Index")" class="btn btn-primary">回上一頁</a>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,91 @@
+﻿@model IEnumerable<EndTermProjectBack.Models.ViewModels.TextCarouselVm>
+
+
+@{
+    ViewBag.Title = "TestIndex";
+}
+
+<style>
+    table {
+        width: 100%;
+    }
+
+        table td {
+            vertical-align: middle;
+        }
+</style>
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">首頁</a></li>
+            <li class="breadcrumb-item active"><a href="@Url.Action("Index", "Home")"></a>前台頁面調整</li>
+            <li class="breadcrumb-item active" aria-current="page">至頂文字輪播</li>
+        </ol>
+    </nav>
+</div>
+<hr />
+
+<div id="carouselExampleControls"
+     class="carousel slide"
+     data-bs-ride="carousel"
+     style="font-size:25px">
+    <div class="carousel-inner">
+        @foreach (var item in Model)
+        {
+            if(item.Enabled == true)
+            { 
+            <div class="carousel-item active data-bs-interval=1 indexTopColor">
+                <a class="d-block indexTop"> @Html.DisplayFor(modelItem => item.Description)</a>
+            </div>
+            }
+        }
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+
+<table class="table" style="text-align:center">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Enabled)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Enabled)
+            </td>
+            <td>
+                <button style="border: 1px solid #ccc; padding: 5px; text-align: center; text-decoration: none; color: #333; border-radius: 5px;" onclick="window.location.href='@Url.Action("EditTextCarousel", new { id = item.Id })'">編輯</button>
+
+            </td>
+        </tr>
+    }
+
+</table>
+<div style="text-align:end">
+    <a href="@Url.Action("CreateTextCarousel", "Carousel")" class="btn btn-primary">新增</a>
+</div>

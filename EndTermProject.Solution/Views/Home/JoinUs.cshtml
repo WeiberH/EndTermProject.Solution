@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "JoinUs";
+}
+
+<style>
+    .about p {
+        font-size: larger;
+    }
+
+    #picture {
+        object-fit: cover;
+        object-position: center;
+        height: 300px;
+        margin-top: 5px;
+    }
+
+    .perspective {
+        margin-left: 15px;
+        font-size: larger;
+        line-height: 40px;
+        text-align: justify;
+    }
+
+
+    h2 {
+        font-weight: bold;
+        text-align: center;
+    }
+
+    h3 {
+        text-align: center;
+    }
+
+</style>
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">首頁</a></li>
+            <li class="breadcrumb-item active" aria-current="page">關於我們</li>
+            <li class="breadcrumb-item active" aria-current="page">加入我們</li>
+        </ol>
+    </nav>
+</div>
+<hr />
+
+<div class="container about">
+    <div class="row">
+        <div class="row"
+             style="border-top: none; margin: auto 0; margin-top: 20px">
+            <img src="~/Images/JoinUs.jpg"
+                 alt=""
+                 id="picture" />
+        </div>
+        <h2 style="margin-top: 20px">Join Us</h2>
+        <div style="width: 700px; margin: 0 auto">
+            <p>
+                Rivers Remedies
+                從世界各地精選與我們理念相同的利基品牌與產品，與兩岸三地的消費者共同分享品味生活、健康人生。
+            </p>
+        </div>
+
+        <ol class="perspective" style="text-align: center">
+            <span><strong>如果您也認同並擁有以下價值觀</strong></span>
+            <br />
+            <span>Vision 懷抱願景與夢想</span>
+            <br />
+            <span>Intelligent 聰明又有創意</span>
+            <br />
+            <span>Trust & Teamwork 重視團隊合作與互相信任</span>
+            <br />
+            <span>Enthusiastic 熱情且充滿動力</span>
+            <br />
+            <span>Learning 持續學習與成長</span>
+        </ol>
+
+        <div style="width: 700px; margin: 0 auto">
+            <p>
+                同時具備個人獨特的品味或樂於實踐健康、優質、勇於追求完美的生活態度，
+                歡迎您加入我們的團隊，與我們共創價值、品味人生！
+                更多公司及通路品牌理念與詳細職缺資訊，請來信做進一步了解：service@River.com
+            </p>
+        </div>
+    </div>
+</div>
+

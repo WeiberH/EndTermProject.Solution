@@ -1,0 +1,145 @@
+﻿@model IEnumerable<EndTermProjectBack.Models.ViewModels.BannerCarouselVm>
+
+
+@{
+    ViewBag.Title = "BannerCarousel";
+}
+
+<style>
+    table {
+        width: 100%;
+    }
+
+        table td {
+            vertical-align: middle;
+        }
+    .truncate-text {
+        max-width: 180px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+</style>
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">首頁</a></li>
+            <li class="breadcrumb-item active"><a href="@Url.Action("Index", "Home")"></a>前台頁面調整</li>
+            <li class="breadcrumb-item active" aria-current="page">Banner輪播</li>
+        </ol>
+    </nav>
+</div>
+<hr />
+
+
+<div class="container">
+    @*輪播 begin*@
+    <div id="carouselExampleCaptions"
+         class="carousel slide"
+         data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            @for (int i = 0, index = 0; i < Model.Count(); i++)
+            {
+                var item = Model.ElementAt(i);
+                if (item.Enabled == true)
+                {
+                    <button type="button"
+                            data-bs-target="#carouselExampleCaptions"
+                            data-bs-slide-to="@index"
+                            @(index == 0 ? "class=active" : "")></button>
+                    index++;
+                }
+            }
+        </div>
+
+        <div class="carousel-inner">
+
+            @foreach (var item in Model)
+            {
+                if (item.Enabled == true)
+                {
+                    <div class="carousel-item active data-bs-interval=1">
+                        <img src="/Images/Carousel/@Html.DisplayFor(modelItem => item.Image)" class="d-block w-100" alt="顯示異常" />
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>@Html.DisplayFor(modelItem => item.Headline)</h5>
+                            <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+        <button class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    @*輪播 end*@
+</div>
+
+
+
+
+
+
+<table class="table" style="text-align:center">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Headline)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Enabled)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="truncate-text">
+                @Html.DisplayFor(model => item.Headline)
+            </td>
+            <td class="truncate-text">
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatTime)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Image)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Enabled)
+            </td>
+            <td>
+                <button style="border: 1px solid #ccc; padding: 5px; text-align: center; text-decoration: none; color: #333; border-radius: 5px;" onclick="window.location.href='@Url.Action("EditBannerCarousel", new { id = item.Id })'">編輯</button>
+
+            </td>
+        </tr>
+    }
+
+</table>
+<div style="text-align:end">
+    <a href="@Url.Action("CreateBannerCarousel", "Carousel")" class="btn btn-primary">新增</a>
+</div>

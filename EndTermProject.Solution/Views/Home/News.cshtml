@@ -1,0 +1,86 @@
+﻿@model IEnumerable<EndTermProject.Solution.Models.Entities.News>
+
+@{
+    ViewBag.Title = "News";
+}
+
+<style>
+    ul > li {
+        text-decoration: none;
+        color: black;
+        cursor: pointer
+    }
+
+    .liml {
+        margin-left: 15px
+    }
+</style>
+
+
+<div class="container" style="margin-top:240px">
+    <div class="row">
+        <div class="col-lg-4 col-md-6">
+            <ol style="font-size: 1.1em">
+                <li style="list-style-type: none">
+                    最新消息
+                    <ul>
+                        <li data-season="" style="list-style-type: none">全部</li>
+                        <li data-season="春季" class="liml">春季</li>
+                        <li data-season="夏季" class="liml">夏季</li>
+                        <li data-season="秋季" class="liml">秋季</li>
+                        <li data-season="冬季" class="liml">冬季</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-8 col-md-6">
+            <div id="news-container">
+                @foreach (var newsItem in Model)
+                {
+                    <div>
+
+                        <a href="@Url.Action("NewsContent", "Home", new { id = newsItem.Id })" class="textNoneLine">
+                            <img src="~/Images/News/@newsItem.Image" alt="顯示異常" style="width: 130px" />
+                            <span style="margin-left: 15px">
+                                @newsItem.Time.ToString("yyyy-MM-dd")
+                                [@newsItem.Title]
+                                @newsItem.Description.Substring(0, Math.Min(20, @newsItem.Description.Length))
+                            </span>
+                        </a>
+                    </div>
+                    <br />
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("li[data-season]").click(function () {
+            var season = $(this).data("season");
+
+            $.ajax({
+                url: "@Url.Action("News", "Home")",
+                type: "GET",
+                data: { season: season },
+                success: function (data) {
+                    // 在這裡找到要更新的目標元素
+                    var targetElement = $("#news-container");
+
+                    // 找到新聞部分的HTML
+                    var newsHtml = $(data).find("#news-container").html();
+
+                    // 更新目標元素
+                    targetElement.html(newsHtml);
+                },
+                error: function () {
+                    alert("發生錯誤");
+                }
+            });
+        });
+    });
+</script>
+
+

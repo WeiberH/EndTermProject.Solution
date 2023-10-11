@@ -1,0 +1,129 @@
+﻿@model EndTermProjectBack.Models.ViewModels.EditProfileVm
+
+@{
+    ViewBag.Title = "EditMember";
+}
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">首頁</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("MemberIndex", "Members")">會員維護</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("MemberIndex", "Members")">會員總覽</a></li>
+            <li class="breadcrumb-item active" aria-current="page">編輯會員資訊</li>
+        </ol>
+    </nav>
+</div>
+<hr />
+
+<style>
+    .custom-arrow {
+        height: 100%;
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="row" style="display:flex;align-items:center">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="col-lg-6 mb-3">
+                @Html.LabelFor(model => model.Account, htmlAttributes: new { @class = "form-label col-md-2" })
+                @Html.EditorFor(model => model.Account, new { htmlAttributes = new { @class = "form-control", Style = "background-color: #f2f2f2", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Account, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-lg-6 mb-3">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "form-label col-md-2" })
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", Style = "background-color: #f2f2f2", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-lg-6 mb-3">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "form-label col-md-2" })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", Style = "background-color: #f2f2f2", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-lg-6 mb-3">
+                @Html.LabelFor(model => model.Telephone, htmlAttributes: new { @class = "form-label col-md-2" })
+                @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @class = "form-control", Style = "background-color: #f2f2f2", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-lg-6 mb-3">
+                @Html.LabelFor(model => model.DateofBirth, htmlAttributes: new { @class = "form-label col-md-2" })
+                @Html.EditorFor(model => model.DateofBirth, new { htmlAttributes = new { @class = "form-control", Style = "background-color: #f2f2f2", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.DateofBirth, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-lg-2 mb-3">
+                @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "form-label col-md-2", style = "display:inline" })
+                @{
+                    string genderText = Model.Gender ? "男性" : "女性";
+                }
+                @Html.TextBoxFor(model => model.Gender, genderText, new { @class = "form-control", style = "background-color: #f2f2f2;margin-top: 5px", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+            </div>
+
+
+
+
+
+            <div class="col-lg-2 mb-3">
+                @Html.LabelFor(model => model.Enabled, htmlAttributes: new { @class = "form-label col-md-2", style = "display:inline" })
+                <div class="form-group">
+                    <div class="input-group">
+                        @Html.DropDownListFor(model => model.Enabled, new SelectList(new List<SelectListItem>
+                        {
+                            new SelectListItem { Text = "已啟用", Value = "true" },
+                            new SelectListItem { Text = "未啟用", Value = "false" }
+                        }, "Value", "Text"), new { @class = "form-control", style = "margin-top:5px" })
+                        <div class="input-group-append" style="margin-top: 5px">
+                            <span class="input-group-text"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Enabled, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="col-lg-2 mb-3">
+                @Html.LabelFor(model => model.IsConfirmed, htmlAttributes: new { @class = "form-label col-md-2", style = "display:inline" })
+                <div class="form-group">
+                    <div class="input-group">
+                        @Html.DropDownListFor(model => model.IsConfirmed, new SelectList(new List<SelectListItem>
+                        {
+                            new SelectListItem { Text = "已開通", Value = "true" },
+                            new SelectListItem { Text = "未開通", Value = "false" }
+                        }, "Value", "Text"), new { @class = "form-control", style = "margin-top:5px" })
+                        <div class="input-group-append" style="margin-top: 5px">
+                            <span class="input-group-text"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.IsConfirmed, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-lg-12 mb-3">
+                <div class="text-end">
+                    <a href="@Url.Action("MemberIndex", "Members")" class="btn btn-primary">返回上一頁</a>
+                    <input type="submit" value="確認" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

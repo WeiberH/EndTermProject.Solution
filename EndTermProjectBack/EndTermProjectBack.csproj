@@ -1,0 +1,592 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5DBA83D1-85F4-4B05-9A3B-054A68E3EB31}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EndTermProjectBack</RootNamespace>
+    <AssemblyName>EndTermProjectBack</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44387</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.2.0.151\lib\net461\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.1\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.9\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.9\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CarouselApiController.cs" />
+    <Compile Include="Controllers\CarouselController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MembersController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\PaytypesController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\StatusController.cs" />
+    <Compile Include="Controllers\StockDatasController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Infra\FileRequired.cs" />
+    <Compile Include="Infra\FileSizeValidator.cs" />
+    <Compile Include="Infra\UploadFileHelper.cs" />
+    <Compile Include="Models\Criterias\MemberSearchCriteria.cs" />
+    <Compile Include="Models\DTOs\MemberDTO.cs" />
+    <Compile Include="Models\EFModels\AppDbContext.cs" />
+    <Compile Include="Models\EFModels\BannerCarousel.cs" />
+    <Compile Include="Models\EFModels\Brand.cs" />
+    <Compile Include="Models\EFModels\Capacity.cs" />
+    <Compile Include="Models\EFModels\Cart.cs" />
+    <Compile Include="Models\EFModels\CartItem.cs" />
+    <Compile Include="Models\EFModels\Category.cs" />
+    <Compile Include="Models\EFModels\City.cs" />
+    <Compile Include="Models\EFModels\District.cs" />
+    <Compile Include="Models\EFModels\FAQ.cs" />
+    <Compile Include="Models\EFModels\Favorite.cs" />
+    <Compile Include="Models\EFModels\Member.cs" />
+    <Compile Include="Models\EFModels\News.cs" />
+    <Compile Include="Models\EFModels\Note.cs" />
+    <Compile Include="Models\EFModels\Order.cs" />
+    <Compile Include="Models\EFModels\OrderItem.cs" />
+    <Compile Include="Models\EFModels\Paytype.cs" />
+    <Compile Include="Models\EFModels\Product.cs" />
+    <Compile Include="Models\EFModels\ProductImage.cs" />
+    <Compile Include="Models\EFModels\SecondaryCategory.cs" />
+    <Compile Include="Models\EFModels\Status.cs" />
+    <Compile Include="Models\EFModels\TextCarousel.cs" />
+    <Compile Include="Models\EFModels\User.cs" />
+    <Compile Include="Models\Entities\SummaryStock.cs" />
+    <Compile Include="Models\OrderSearchCriteria.cs" />
+    <Compile Include="Models\Services\MemberServices.cs" />
+    <Compile Include="Models\ViewModels\BannerCarouselVm.cs" />
+    <Compile Include="Models\ViewModels\EditProfileVm.cs" />
+    <Compile Include="Models\ViewModels\MemberVm.cs" />
+    <Compile Include="Models\ViewModels\OrderItemVm.cs" />
+    <Compile Include="Models\ViewModels\OrderStatusVm.cs" />
+    <Compile Include="Models\ViewModels\OrderVm.cs" />
+    <Compile Include="Models\ViewModels\PaytypeVm.cs" />
+    <Compile Include="Models\ViewModels\ProductViewModel.cs" />
+    <Compile Include="Models\ViewModels\StatusVm.cs" />
+    <Compile Include="Models\ViewModels\StockDataVm.cs" />
+    <Compile Include="Models\ViewModels\TextCarouselVm.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CarouselRepository.cs" />
+    <Compile Include="Repositories\MemberRepository.cs" />
+    <Compile Include="Repositories\OrderRepository.cs" />
+    <Compile Include="Repositories\StockDataRepository.cs" />
+    <Compile Include="Utilities\MemberExts.cs" />
+    <Compile Include="Utilities\SqlDb.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Layout.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Sidebar.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="FileName\1zbvd24o.21m.jpg" />
+    <Content Include="FileName\3xg05kpi.i2f.jpg" />
+    <Content Include="FileName\5giepghg.h1n.jpg" />
+    <Content Include="FileName\aqj0bwvn.anv.jpg" />
+    <Content Include="FileName\bamfordbanner.jpg" />
+    <Content Include="FileName\bamford蠟燭1.jpg" />
+    <Content Include="FileName\bamford蠟燭2.jpg" />
+    <Content Include="FileName\bamford蠟燭3.jpg" />
+    <Content Include="FileName\e5diy1ju.0zp.jpg" />
+    <Content Include="FileName\eu55zk5a.shj.jpg" />
+    <Content Include="FileName\g5w4yd1a.oy2.jpg" />
+    <Content Include="FileName\gmq5zc02.txd.jpg" />
+    <Content Include="FileName\gwbr10xk.cuh.jpg" />
+    <Content Include="FileName\mlmbanner.jpg" />
+    <Content Include="FileName\neombanner.jpg" />
+    <Content Include="FileName\ng5tdcut.uv2.jpg" />
+    <Content Include="FileName\ngtwojas.izh.jpg" />
+    <Content Include="FileName\oy3ijk3w.rem.jpg" />
+    <Content Include="FileName\u1exdg3t.3mr.jpg" />
+    <Content Include="FileName\wub3qngc.fnn.jpg" />
+    <Content Include="FileName\xjrop01o.rip.jpg" />
+    <Content Include="FileName\yvhfyic2.vaw.jpg" />
+    <Content Include="FileName\兒時記憶淡香精1.jpg" />
+    <Content Include="FileName\兒時記憶淡香精2.jpg" />
+    <Content Include="FileName\兒時記憶淡香精3.jpg" />
+    <Content Include="FileName\兒時記憶淡香精4.jpg" />
+    <Content Include="FileName\卡爾西烏淡香精1.jpg" />
+    <Content Include="FileName\卡爾西烏淡香精2.jpg" />
+    <Content Include="FileName\卡爾西烏淡香精3.jpg" />
+    <Content Include="FileName\天竺葵沐浴露1.jpg" />
+    <Content Include="FileName\天竺葵沐浴露2.jpg" />
+    <Content Include="FileName\天竺葵護手霜1.jpg" />
+    <Content Include="FileName\天竺葵護手霜2.jpg" />
+    <Content Include="FileName\天竺葵護手霜3.jpg" />
+    <Content Include="FileName\天竺葵護手霜4.jpg" />
+    <Content Include="FileName\天竺葵護手霜5.jpg" />
+    <Content Include="FileName\天竺葵護手霜6.jpg" />
+    <Content Include="FileName\天竺葵身體乳1.jpg" />
+    <Content Include="FileName\天竺葵身體乳2.jpg" />
+    <Content Include="FileName\完美幸福潤膚乳1.jpg" />
+    <Content Include="FileName\完美幸福潤膚乳2.jpg" />
+    <Content Include="FileName\完美幸福潤膚乳3.jpg" />
+    <Content Include="FileName\室內擴香1.jpg" />
+    <Content Include="FileName\新浪潮淡香精1.jpg" />
+    <Content Include="FileName\新浪潮淡香精2.jpg" />
+    <Content Include="FileName\日安美好潤膚乳1.jpg" />
+    <Content Include="FileName\日安美好潤膚乳2.jpg" />
+    <Content Include="FileName\日安美好潤膚乳3.jpg" />
+    <Content Include="FileName\日安美好護手霜1.jpg" />
+    <Content Include="FileName\日安美好護手霜2.jpg" />
+    <Content Include="FileName\日安美好身體潤澤霜1.jpg" />
+    <Content Include="FileName\日安美好身體潤澤霜2.jpg" />
+    <Content Include="FileName\日安美好身體潤澤霜3.jpg" />
+    <Content Include="FileName\日安美好身體潤澤霜4.jpg" />
+    <Content Include="FileName\晨曦香氛室內擴香1.jpg" />
+    <Content Include="FileName\木苔淡香精1.jpg" />
+    <Content Include="FileName\木苔淡香精2.jpg" />
+    <Content Include="FileName\木苔淡香精3.jpg" />
+    <Content Include="FileName\木苔淡香精4.jpg" />
+    <Content Include="FileName\果然白玫瑰淡香精1.jpg" />
+    <Content Include="FileName\果然白玫瑰淡香精2.jpg" />
+    <Content Include="FileName\柑橘沐浴露1.jpg" />
+    <Content Include="FileName\柑橘沐浴露2.jpg" />
+    <Content Include="FileName\柑橘身體乳1.jpg" />
+    <Content Include="FileName\柑橘身體乳2.jpg" />
+    <Content Include="FileName\模里西斯淡香精1.jpg" />
+    <Content Include="FileName\模里西斯淡香精2.jpg" />
+    <Content Include="FileName\活力綻放護手霜1.jpg" />
+    <Content Include="FileName\活力綻放護手霜2.jpg" />
+    <Content Include="FileName\澄香愉悅護手霜1.jpg" />
+    <Content Include="FileName\澄香愉悅護手霜2.jpg" />
+    <Content Include="FileName\皇家奢華潤膚乳1.jpg" />
+    <Content Include="FileName\皇家奢華潤膚乳2.jpg" />
+    <Content Include="FileName\皇家奢華潤膚乳3.jpg" />
+    <Content Include="FileName\皇家奢華護手霜1.jpg" />
+    <Content Include="FileName\皇家奢華護手霜2.jpg" />
+    <Content Include="FileName\皇家奢華身體潤澤霜1.jpg" />
+    <Content Include="FileName\皇家奢華身體潤澤霜2.jpg" />
+    <Content Include="FileName\皇家奢華身體潤澤霜3.jpg" />
+    <Content Include="FileName\皇家奢華身體潤澤霜4.jpg" />
+    <Content Include="FileName\秘徑漫遊淡香精1.jpg" />
+    <Content Include="FileName\秘徑漫遊淡香精2.jpg" />
+    <Content Include="FileName\秘徑漫遊淡香精3.jpg" />
+    <Content Include="FileName\紅霞香氛室內擴香1.jpg" />
+    <Content Include="FileName\舒緩恬睡護手霜1.jpg" />
+    <Content Include="FileName\舒緩恬睡護手霜2.jpg" />
+    <Content Include="FileName\舒緩恬睡身體潤澤霜1.jpg" />
+    <Content Include="FileName\舒緩恬睡身體潤澤霜2.jpg" />
+    <Content Include="FileName\舒緩恬睡身體潤澤霜3.jpg" />
+    <Content Include="FileName\蒝野淡香精1.jpg" />
+    <Content Include="FileName\蒝野淡香精2.jpg" />
+    <Content Include="FileName\蒝野淡香精3.jpg" />
+    <Content Include="FileName\蒝野淡香精4.jpg" />
+    <Content Include="FileName\薄暮香氛室內擴香1.jpg" />
+    <Content Include="FileName\蠟燭1.jpg" />
+    <Content Include="FileName\蠟燭2.jpg" />
+    <Content Include="FileName\蠟燭3.jpg" />
+    <Content Include="FileName\靜謐香氛室內擴香1.jpg" />
+    <Content Include="FileName\餘暉香氛室內擴香1.jpg" />
+    <Content Include="FileName\香氛蠟燭夏夜1.jpg" />
+    <Content Include="FileName\香氛蠟燭果然白玫瑰1.jpg" />
+    <Content Include="FileName\香氛蠟燭果然茉莉1.jpg" />
+    <Content Include="FileName\香氛蠟燭果然萊姆1.jpg" />
+    <Content Include="FileName\香氛蠟燭歸途1.jpg" />
+    <Content Include="FileName\香氛蠟燭迷情薰衣草1.jpg" />
+    <Content Include="FileName\鼠尾草沐浴露1.jpg" />
+    <Content Include="FileName\鼠尾草沐浴露2.jpg" />
+    <Content Include="FileName\鼠尾草身體乳1.jpg" />
+    <Content Include="FileName\鼠尾草身體乳2.jpg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Images\24114t1a.bbt.jpg" />
+    <Content Include="Images\2qz413yt.ric.jpg" />
+    <Content Include="Images\4oqzijul.udu.jpg" />
+    <Content Include="Images\552t3rgx.h5o.jpg" />
+    <Content Include="Images\5rvnw1uo.4je.jpg" />
+    <Content Include="Images\AboutUs.jpg" />
+    <Content Include="Images\anadsvrw.tmp.jpg" />
+    <Content Include="Images\bamfordbanner.jpg" />
+    <Content Include="Images\bamford蠟燭1.jpg" />
+    <Content Include="Images\baxtn4bo.kqe.jpg" />
+    <Content Include="Images\Carousel\輪播-1.jpg" />
+    <Content Include="Images\Carousel\輪播-2.jpg" />
+    <Content Include="Images\Carousel\輪播-3.jpg" />
+    <Content Include="Images\Carousel\輪播-4.jpg" />
+    <Content Include="Images\Carousel\輪播-5.jpg" />
+    <Content Include="Images\eukddxf3.xeq.jpg" />
+    <Content Include="Images\HotProducts\熱門商品-1.jpg" />
+    <Content Include="Images\HotProducts\熱門商品-2.jpg" />
+    <Content Include="Images\HotProducts\熱門商品-3.jpg" />
+    <Content Include="Images\HotProducts\熱門商品-4.jpg" />
+    <Content Include="Images\HotProducts\熱門商品-5.jpg" />
+    <Content Include="Images\HotProducts\熱門商品-6.jpg" />
+    <Content Include="Images\HotProducts\熱門商品-7.jpg" />
+    <Content Include="Images\HotProducts\熱門商品-8.jpg" />
+    <Content Include="Images\HotProducts\熱門商品-9.jpg" />
+    <Content Include="Images\IndexBottomLogo.png" />
+    <Content Include="Images\iygrwroz.hvr.jpg" />
+    <Content Include="Images\JoinUs.jpg" />
+    <Content Include="Images\jv4w5frc.tzv.jpg" />
+    <Content Include="Images\kk5m3ngd.y3v.jpg" />
+    <Content Include="Images\mlmbanner.jpg" />
+    <Content Include="Images\neombanner.jpg" />
+    <Content Include="Images\News\最新消息1.png" />
+    <Content Include="Images\News\最新消息10.png" />
+    <Content Include="Images\News\最新消息2.png" />
+    <Content Include="Images\News\最新消息3.png" />
+    <Content Include="Images\News\最新消息4.png" />
+    <Content Include="Images\News\最新消息5.png" />
+    <Content Include="Images\News\最新消息6.png" />
+    <Content Include="Images\News\最新消息7.png" />
+    <Content Include="Images\News\最新消息8.png" />
+    <Content Include="Images\News\最新消息9.png" />
+    <Content Include="Images\Products\No.02 兒時記憶淡香精60.jpg" />
+    <Content Include="Images\Products\No.04 秘徑漫遊淡香精61.jpg" />
+    <Content Include="Images\Products\No.09 模里西斯淡香精62.jpg" />
+    <Content Include="Images\Products\No.13 新浪潮淡香精59.jpg" />
+    <Content Include="Images\Products\No.18 卡爾西烏淡香精152.jpg" />
+    <Content Include="Images\Products\果然白玫瑰淡香精63.jpg" />
+    <Content Include="Images\Products\香氛蠟燭 果然茉莉41.jpg" />
+    <Content Include="Images\Recommends\專屬推薦-1.png" />
+    <Content Include="Images\Recommends\專屬推薦-2.jpeg" />
+    <Content Include="Images\Recommends\專屬推薦-3.jpeg" />
+    <Content Include="Images\Recommends\專屬推薦-4.jpeg" />
+    <Content Include="Images\RegisterCheck.png" />
+    <Content Include="Images\v15wweqe.ga2.jpg" />
+    <Content Include="Images\vqxleyqz.pa0.jpg" />
+    <Content Include="Images\zyyqror4.1rq.jpg" />
+    <Content Include="Images\上傳檔案.jpg" />
+    <Content Include="Images\兒時記憶淡香精1.jpg" />
+    <Content Include="Images\卡爾西烏淡香精1.jpg" />
+    <Content Include="Images\天竺葵沐浴露1.jpg" />
+    <Content Include="Images\天竺葵護手霜1.jpg" />
+    <Content Include="Images\天竺葵身體乳1.jpg" />
+    <Content Include="Images\完美幸福潤膚乳1.jpg" />
+    <Content Include="Images\室內擴香1.jpg" />
+    <Content Include="Images\專屬推薦-1.png" />
+    <Content Include="Images\專屬推薦-2.jpeg" />
+    <Content Include="Images\專屬推薦-3.jpeg" />
+    <Content Include="Images\專屬推薦-4.jpeg" />
+    <Content Include="Images\新浪潮淡香精1.jpg" />
+    <Content Include="Images\日安美好潤膚乳1.jpg" />
+    <Content Include="Images\日安美好護手霜1.jpg" />
+    <Content Include="Images\日安美好身體潤澤霜1.jpg" />
+    <Content Include="Images\晨曦香氛室內擴香1.jpg" />
+    <Content Include="Images\木苔淡香精1.jpg" />
+    <Content Include="Images\果然白玫瑰淡香精1.jpg" />
+    <Content Include="Images\柑橘沐浴露1.jpg" />
+    <Content Include="Images\柑橘身體乳1.jpg" />
+    <Content Include="Images\模里西斯淡香精1.jpg" />
+    <Content Include="Images\活力綻放護手霜1.jpg" />
+    <Content Include="Images\澄香愉悅護手霜1.jpg" />
+    <Content Include="Images\熱門商品-1.jpg" />
+    <Content Include="Images\熱門商品-2.jpg" />
+    <Content Include="Images\熱門商品-3.jpg" />
+    <Content Include="Images\熱門商品-4.jpg" />
+    <Content Include="Images\熱門商品-5.jpg" />
+    <Content Include="Images\熱門商品-6.jpg" />
+    <Content Include="Images\熱門商品-7.jpg" />
+    <Content Include="Images\熱門商品-8.jpg" />
+    <Content Include="Images\熱門商品-9.jpg" />
+    <Content Include="Images\皇家奢華潤膚乳1.jpg" />
+    <Content Include="Images\皇家奢華護手霜1.jpg" />
+    <Content Include="Images\皇家奢華身體潤澤霜1.jpg" />
+    <Content Include="Images\秘徑漫遊淡香精1.jpg" />
+    <Content Include="Images\紅霞香氛室內擴香1.jpg" />
+    <Content Include="Images\舒緩恬睡護手霜1.jpg" />
+    <Content Include="Images\舒緩恬睡身體潤澤霜1.jpg" />
+    <Content Include="Images\蒝野淡香精1.jpg" />
+    <Content Include="Images\薄暮香氛室內擴香1.jpg" />
+    <Content Include="Images\蠟燭1.jpg" />
+    <Content Include="Images\蠟燭2.jpg" />
+    <Content Include="Images\蠟燭3.jpg" />
+    <Content Include="Images\輪播-1.jpg" />
+    <Content Include="Images\輪播-2.jpg" />
+    <Content Include="Images\輪播-3.jpg" />
+    <Content Include="Images\輪播Banner.png" />
+    <Content Include="Images\靜謐香氛室內擴香1.jpg" />
+    <Content Include="Images\餘暉香氛室內擴香1.jpg" />
+    <Content Include="Images\香氛蠟燭夏夜1.jpg" />
+    <Content Include="Images\香氛蠟燭果然白玫瑰1.jpg" />
+    <Content Include="Images\香氛蠟燭果然茉莉1.jpg" />
+    <Content Include="Images\香氛蠟燭果然萊姆1.jpg" />
+    <Content Include="Images\香氛蠟燭歸途1.jpg" />
+    <Content Include="Images\香氛蠟燭迷情薰衣草1.jpg" />
+    <Content Include="Images\鼠尾草沐浴露1.jpg" />
+    <Content Include="Images\鼠尾草身體乳1.jpg" />
+    <Content Include="js\ShowOrderItem.js" />
+    <Content Include="js\Sidebar.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="libman.json" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Members\EditMember.cshtml" />
+    <Content Include="Views\Members\MemberIndex.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Carousel\TextCarousel.cshtml" />
+    <Content Include="Views\Carousel\EditTextCarousel.cshtml" />
+    <Content Include="Views\Carousel\CreateTextCarousel.cshtml" />
+    <Content Include="Views\Carousel\BannerCarousel.cshtml" />
+    <Content Include="Views\Carousel\EditBannerCarousel.cshtml" />
+    <Content Include="Views\Carousel\CreateBannerCarousel.cshtml" />
+    <Content Include="Views\Paytypes\Create.cshtml" />
+    <Content Include="Views\Paytypes\Edit.cshtml" />
+    <Content Include="Views\Paytypes\Index.cshtml" />
+    <Content Include="Views\Status\Create.cshtml" />
+    <Content Include="Views\Status\Edit.cshtml" />
+    <Content Include="Views\Status\Index.cshtml" />
+    <Content Include="Views\StockDatas\Index.cshtml" />
+    <Content Include="Views\Home\IndexApi.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50897</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44387/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>此專案參考這部電腦上所缺少的 NuGet 套件。請啟用 NuGet 套件還原，以下載該套件。如需詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的檔案是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

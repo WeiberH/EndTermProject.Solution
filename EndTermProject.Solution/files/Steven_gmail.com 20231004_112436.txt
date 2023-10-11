@@ -1,0 +1,7 @@
+﻿from:rajaboris60101@gmail.com
+to:Steven@gmail.com
+subject:[帳號開通通知信]
+
+Hi 陳冠華d,
+<br />
+請點擊此連結 [<a href='https://localhost:44355/Members/ActiveRegister?memberid=35&confirmCode=afa968a6b36746388e0ec6e037d03ffc' target='_blank'>來啟動開通帳號</a>], 如果您已經開通, 請忽略本信, 謝謝

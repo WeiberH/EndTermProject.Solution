@@ -1,0 +1,246 @@
+﻿@model IEnumerable<EndTermProject.Solution.Models.EFModels.BannerCarousel>
+
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<main>
+
+    <div class="container">
+        @*輪播 begin*@
+        <div id="carouselExampleCaptions"
+             class="carousel slide"
+             data-bs-ride="carousel">
+            <div class="carousel-indicators">
+
+                @for (int i = 0, index = 0; i < Model.Count(); i++)
+                {
+                    var item = Model.ElementAt(i);
+                    if (item.Enabled == true)
+                    {
+                        <button type="button"
+                                data-bs-target="#carouselExampleCaptions"
+                                data-bs-slide-to="@index"
+                                @(index == 0 ? "class=active" : "")></button>
+                        index++;
+                    }
+                }
+
+            </div>
+            <div class="carousel-inner">
+
+                @foreach (var item in Model)
+                {
+                    if (item.Enabled == true)
+                    {
+                        <div class="carousel-item active data-bs-interval=1">
+                            <img src="/Images/Carousel/@Html.DisplayFor(modelItem => item.Image)" class="d-block w-100" alt="顯示異常" />
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>@Html.DisplayFor(modelItem => item.Headline)</h5>
+                                <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                            </div>
+                        </div>
+                    }
+                }
+
+            </div>
+            <button class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        @*輪播 end*@
+    </div>
+
+    @*專屬推薦 begin*@
+    <div class="row" style="text-align: center">
+        <span class="row justify-content-center"
+              style="font-size: 35px; margin-top: 20px">一專屬推薦一</span>
+
+        <div class="col-lg-3 col-md-6">
+            <a href="@Url.Action("FilterProductsBySecondaryCategory", "ProductFilters", new { SecondaryCategoryId = 1 })" class="textNoneLine">
+                <img src="/Images/Recommends/專屬推薦-1.png"
+                     class="img-fluid" />香氛系列
+            </a>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <a href="@Url.Action("FilterProductsBySecondaryCategory", "ProductFilters",new { SecondaryCategoryId = 3 })" class="textNoneLine">
+                <img src="/Images/Recommends/專屬推薦-2.jpeg"
+                     class="img-fluid" />蠟燭系列
+            </a>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <a href="@Url.Action("FilterProductsBySecondaryCategory", "ProductFilters",new { SecondaryCategoryId = 8 })" class="textNoneLine">
+                <img src="/Images/Recommends/專屬推薦-3.jpeg"
+                     class="img-fluid" />清潔沐浴系列
+            </a>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <a href="@Url.Action("FilterProductsBySecondaryCategory", "ProductFilters",new { SecondaryCategoryId = 5 })" class="textNoneLine">
+                <img src="~/Images/Recommends/專屬推薦-4.jpeg" class="img-fluid" />其他
+            </a>
+        </div>
+    </div>
+    @*專屬推薦 end*@
+
+    @*熱門推薦 begin*@
+    <div class="container">
+        <span class="row justify-content-center"
+              style="font-size: 35px; margin-top: 20px">一熱門商品一</span>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+
+            <div class="col">
+                <div class="card h-100">
+                    <a href="https://localhost:44355/Products/Details/43" class="textNoneLine">
+                        <img src="/Images/HotProducts/熱門商品-1.jpg" class="card-img-top" />
+                        <div class="card-body">
+                            <h4 class="card-title">香氛蠟燭 果然萊姆</h4>
+                            <h6>No.13 Nouvelle Vague Candle</h6>
+                            <p class="card-text">
+                                清爽、豐富的香氣將帶領你暢遊卡布里島，這是瑪麗和姐姐造訪義大利南方阿瑪菲海岸時時常會來的地方。
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <a href="https://localhost:44355/Products/Details/92" class="textNoneLine">
+                        <img src="/Images/HotProducts/熱門商品-2.jpg" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h4 class="card-title">白鳶尾香氛蠟燭</h4>
+                            <h6>Luxury Candle Real Luxury</h6>
+                            <p class="card-text">
+                                有如包覆在喀什米爾毛毯和圍在火邊的溫暖，屬於自己珍貴的奢華時光，迷人的茉莉香加上淡淡的法國薰衣草及花梨木的舒服微微辛香。
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <a href="https://localhost:44355/Products/Details/90" class="textNoneLine">
+                        <img src="/Images/HotProducts/熱門商品-3.jpg" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h4 class="card-title">鈴蘭香氛蠟燭</h4>
+                            <h6>Bedtime Hero Scented Candle</h6>
+                            <p class="card-text">
+                                以新鮮果香氣息幫助您睡得更深更香甜。完美結合 洋甘菊 的蘋果蜜香、
+                                伊蘭伊蘭 的恬雅花香，以及 雪松
+                                柔和的木質氣息，以11種純淨精油共譜出自然清新的助眠香息。
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <a href="https://localhost:44355/Products/Details/98" class="textNoneLine">
+                        <img src="/Images/HotProducts/熱門商品-4.jpg" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h4 class="card-title">柑橘身體乳</h4>
+                            <h6>Juniper Berry & Geranium Body Cream</h6>
+                            <p class="card-text">
+                                結合杜松漿果及天竺葵等淨化更新身心的精油配方，富含天然植物油，可深層滋潤並卸下一整天的疲憊，放鬆釋壓。
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <a href="https://localhost:44355/Products/Details/120" class="textNoneLine">
+                        <img src="/Images/HotProducts/熱門商品-5.jpg" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h4 class="card-title">甜橙迷迭香提振淨化身體乳</h4>
+                            <h6>Sweet Orange & Rosemary Exfoliating Body Cream</h6>
+                            <p class="card-text">
+                                結合甜橙、迷迭香等提振活力的精油配方，富含天然植物油，可深層滋潤並為肌膚重新注入活力，光采動人。
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <a href="https://localhost:44355/Products/Details/122" class="textNoneLine">
+                        <img src="/Images/HotProducts/熱門商品-6.jpg" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h4 class="card-title">強效身體乳霜</h4>
+                            <h6>Intensive Body Cream</h6>
+                            <p class="card-text">
+                                能深度修護又保濕的滋潤身體乳霜，是改善乾燥肌膚的完美配方。
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <a href="https://localhost:44355/Products/Details/95" class="textNoneLine">
+                        <img src="/Images/HotProducts/熱門商品-7.jpg" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h4 class="card-title">頭皮淨化保養組 (中性頭皮)</h4>
+                            <h6>Scalp Detox Wake Up Summer Set</h6>
+                            <p class="card-text">
+                                天然胺基酸做為洗淨成分，利用豐潤細緻泡沫洗去油脂。添加CoQ10、獐芽菜、鼠尾草幫助強韌秀髮，尤加利、薄荷、茶樹等天然香氣，創造清新提振的淨化感
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <a href="https://localhost:44355/Products/Details/129" class="textNoneLine">
+                        <img src="/Images/HotProducts/熱門商品-8.jpg" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h4 class="card-title">淨屑止癢洗髮露</h4>
+                            <h6>Anti-itch Shampoo</h6>
+                            <p class="card-text">
+                                98%天然來源萃取，珍貴大葉釣樟萃取含量高達40%，可深度保濕、舒敏止癢；迷迭香葉油抑制頭皮屑；胡椒薄荷油、北非雪松調理頭皮油水平衡，幫助建立適合頭髮生長的健康環境。
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <a href="https://localhost:44355/Products/Details/154" class="textNoneLine">                   
+                        <img src="/Images/HotProducts/熱門商品-9.jpg" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h4 class="card-title">230 樺木彈力亮澤洗髮露</h4>
+                            <h6>230 Shampoo- Birch</h6>
+                            <p class="card-text">
+                                添加樺木萃取精華，含17種氨基酸、礦物質和維生素，可增加亮澤、髮絲彈性並舒緩頭皮。
+                                適合中性至乾性頭皮的洗髮精，敏弱頭皮也能安心使用，溫柔清潔頭髮並增添髮絲光澤及彈力。
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*熱門推薦 end*@
+
+</main>

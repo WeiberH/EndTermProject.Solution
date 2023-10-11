@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="zn-TW">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>River。純粹</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/Layout.css")
+    @Styles.Render("~/Content/PagedList.css")
+    @Styles.Render("~/Content/Sidebar.css")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script src="~/js/Sidebar.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid" style="background-color: rgb(146, 205, 212)">
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")">River。純粹</a>
+        </div>
+    </nav>
+
+    <!-- Sidebar 側邊欄位 -->
+    <div class="container-all">
+        
+        <div class="container-left">
+            <nav id="sidebar">
+                <!-- 展開/收起 按鈕 -->
+                <button type="button" id="collapse" class="collapse-btn">
+                    <i class="fa-solid fa-align-left"></i>
+                </button>
+                <!-- 列表 -->
+                <ul class="list-unstyled">
+                    <p>River</p>
+                    <li>
+                        <a href="@Url.Action("Index", "Home")" class="li-a-text">首頁<i class="fa-solid fa-house"></i></a>
+                    </li>
+
+                    <li>
+                        <a href="#Subliest" data-bs-toggle="collapse" class="li-a-text">
+                            商品管理 <i class="fa-brands fa-product-hunt"></i>
+                        </a>
+                        <ul id="Subliest" class="list-unstyled collapse">
+                            <li><a href="@Url.Action("Index", "Products")">商品總覽</a></li>
+                            <li><a href="@Url.Action("Create", "Products")">新增商品</a></li>
+                            <li><a href="@Url.Action("Index", "StockDatas")">庫金報表</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#Subliest2" data-bs-toggle="collapse" class="li-a-text">
+                            訂單管理 <i class="fa-solid fa-list"></i>
+                        </a>
+                        <ul id="Subliest2" class="list-unstyled collapse">
+                            <li><a href="@Url.Action("Index", "Orders")">訂單總覽</a></li>
+                           
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#Subliest3" data-bs-toggle="collapse"  class="li-a-text">
+                            會員管理 <i class="fa-solid fa-person-circle-check"></i>
+                        </a>
+                        <ul id="Subliest3" class="list-unstyled collapse">
+                            <li><a href="@Url.Action("MemberIndex", "Members")">會員總覽</a></li>
+                            
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#Subliest4" data-bs-toggle="collapse" class="li-a-text">
+                            前台頁面調整 <i class="fa-solid fa-computer"></i>
+                        </a>
+                        <ul id="Subliest4" class="list-unstyled collapse">
+                            <li><a href="@Url.Action("TextCarousel", "Carousel")">文字輪播調整</a></li>
+                            <li><a href="@Url.Action("BannerCarousel", "Carousel")">Banner輪播調整</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="container-right">
+                <div class="container body-content">
+                    @RenderBody()
+            </div>
+        </div>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

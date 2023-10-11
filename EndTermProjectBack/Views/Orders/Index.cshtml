@@ -1,0 +1,226 @@
+﻿@model IEnumerable<EndTermProjectBack.Models.VMModels.OrderVm>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .width {
+        width: 70%;
+        height: 37.33px;
+        float: right;
+        border-radius: 0.375rem;
+        border: 1px solid black
+    }
+
+    span {
+        display: inline-block;
+        margin-top: 5px
+    }
+
+    .pagination-container {
+        /*display: flex;
+        justify-content: center;*/
+        text-align: center;
+    }
+    td {
+        vertical-align: middle;
+    }
+
+    th {
+       text-align:center
+    }
+
+</style>
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Home")">首頁</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">訂單管理</li>
+            <li class="breadcrumb-item active" aria-current="page">訂單總覽</li>
+        </ol>
+    </nav>
+</div>
+<hr />
+
+<div class="mb-3">
+    <div class="container">
+        <form action="" method="get">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <span>@Html.DisplayNameFor(model => model.Receiver):</span> @Html.TextBox("receiver", "", new { @class = " width" })
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <span>  @Html.DisplayNameFor(model => model.TelePhone):</span> @Html.TextBox("telephone", "", new { @class = " width" })
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <span>  @Html.DisplayNameFor(model => model.Email): </span> @Html.TextBox("email", "", new { @class = " width" })
+                        </div>
+                        <div class="col-md-12">
+                            <label for="Paytype"><span> 付款方式:</span> </label>
+                            <select id="Paytype" name="paytypeId" class="width">
+                                <option value=""></option>
+                                @foreach (var item in ((SelectList)ViewBag.Paytype).Distinct())
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label for="Paytype"><span> 貨物狀態:</span> </label>
+                            <select id="Status" name="statusId" style="font-size: 1rem; border-radius: 0.375rem; border:1px solid black" class="width">
+                                <option value=""></option>
+                                @foreach (var item in ((SelectList)ViewBag.Status).Distinct())
+                                {
+                                    <option value="@item.Value">@item.Text</option>   
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <span> 開始日期:</span>  <input type="date" id="StartDate" name="StartDate" class="width" placeholder="123" />
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <span> 結束日期:</span>
+                            <input type="date" id="EndDate" name="EndDate" class="width" />
+                        </div>
+                        <div style="display:inline-block;">
+                            <input type="submit" value="搜尋" class="btn btn-danger" style="float:right" />
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </form>
+    </div>
+
+</div>
+<table class="table table-striped mb-3" id="orderTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Receiver)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TelePhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Paytype)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Receiver)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TelePhone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Paytype)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)<br>
+              <span style="font-size:0.9rem;">@Html.ActionLink("更改", "Edit", new { id = item.Id })</span>
+                </td>
+                <td style="width:100px">
+                    <input type="button" class="btn btn-success btnShowItems" value="顯示明細" data-order-id="@item.Id" />
+                    <input type="button" class="btn btn-danger btnHideItems" value="隱藏明細" data-order-id="@item.Id" />
+                </td>
+            </tr>
+            <tr data-is-detail="true" data-order-id="@item.Id" style="display: none;">
+                <td colspan="9">
+                    <!-- OrderItems 開始 -->
+
+                    <table class="table table-bordered table-striped table-sm ms-auto mt-3 mb-5" style="width:80%">
+                        <thead>
+                            <tr>
+                                <th colspan="4">會員: @Html.DisplayFor(modelItem => item.Member)</th>
+                            </tr>
+                            <tr>
+                                <th>產品名稱</th>
+                                <th>購買數量</th>
+                                <th>產品單價</th>
+                                <th>訂單小計</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var orderItem in item.OrderItems)
+                            {
+                                <tr>
+                                    <td>@orderItem.ProductName</td>
+                                    <td>@orderItem.Qty</td>
+                                    <td>@orderItem.ProductPrice</td>
+                                    <td>@(orderItem.Qty * orderItem.ProductPrice)</td>
+                                </tr>
+                            }
+                            <tr>
+                                <td colspan="3" class="text-end">合計</td>
+                                <td class="text-end">
+                                    @{
+                                        decimal orderItemsTotal = item.OrderItems.Sum(orderItem => orderItem.Qty * orderItem.ProductPrice);
+                                        @orderItemsTotal
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" class="text-end">運費</td>
+                                <td class="text-end">60</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" class="text-end">總金額</td>
+                                <td class="text-end">@item.Total</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- OrderItems 結束 -->
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.PagedListPager((IPagedList)Model, x => Url.Action("Index", new { page = x, @class = "align" }))
+@section scripts
+{
+    <script src="~/JS/ShowOrderItem.js"></script>
+}

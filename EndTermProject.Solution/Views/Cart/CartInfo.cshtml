@@ -1,0 +1,83 @@
+﻿@model EndTermProject.Models.ViewModels.CartVm
+
+@{
+    ViewBag.Title = "CartInfo";
+}
+
+<style>
+    .table {
+        text-align: center;
+        margin: 10px 0px;
+    }
+
+    #Total {
+        height: 10%;
+        position: sticky;
+        bottom: 0;
+        text-align: end !important;
+    }
+</style>
+
+<div class="container" style="background-color: #f5f5f5;">
+    <div class="row">
+        <table class="table table-bordered" style="background-color:white">
+            <thead style="text-align:center">
+                <tr>
+                    <th width="40%">
+                        商品
+                    </th>
+                    <th width="20%">
+                        單價
+                    </th>
+                    <th width="20%">
+                        數量
+                    </th>
+                    <th width="20%">
+                        總計
+                    </th>
+                </tr>
+            </thead>
+        </table>
+        <table class="table table-bordered align-middle" style="border-spacing: 5px; text-align:center; background-color:white">
+            @foreach (var item in Model.CartItems)
+            {
+                <tr>
+                    <td  style="text-align: start;">
+                        <img src="~/Images/@Html.DisplayFor(modelItem => item.Product.Image)" style="width:20%" ><span class="ps-2" id="productName">@Html.DisplayFor(modelItem => item.Product.Name)</span>
+                    </td>
+                    <td id="price" width="20%">
+                        @Html.DisplayFor(modelItem => item.Product.Price)
+                    </td>
+                    <td width="20%">
+                        <button class="btn btn-sm delQty btn-outline-dark" data-id="@item.Product.Id" data-qty="@item.Qty">-</button>
+                        <span style="display:inline-block; width:50%; text-align:center; border:solid 1px black; margin-left:5px"> @Html.DisplayFor(modelItem => item.Qty)</span>
+                        <button class="btn btn-sm addQty btn-outline-dark" data-id="@item.Product.Id" data-qty="@item.Qty" style="margin-left: 5px">+</button>
+                    </td>
+                    <td width="20%">
+                        @Html.DisplayFor(modelItem => item.SubTotal)
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <table class="table table-bordered" style="text-align:end; background-color:white">
+            <tbody>
+                <tr>
+                    <td colspan="5" class="text-end" style="width:100%;" id="Total">
+                        總計:@Model.Total.ToString("#,#")
+
+                        @if (Model.AllowCheckout)
+                        {
+                            <a href="@Url.Action("Checkout", "Cart")" class="btn btn-danger ms-3"
+                               style="color: white; text-decoration: none;">結帳</a>
+
+                        }
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+@section scripts{
+    <script src="~/JS/CartButtons.js"></script>
+}

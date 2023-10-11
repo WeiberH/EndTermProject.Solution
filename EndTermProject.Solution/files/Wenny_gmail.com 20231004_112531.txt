@@ -1,0 +1,7 @@
+﻿from:rajaboris60101@gmail.com
+to:Wenny@gmail.com
+subject:[帳號開通通知信]
+
+Hi 簡筱芸,
+<br />
+請點擊此連結 [<a href='https://localhost:44355/Members/ActiveRegister?memberid=36&confirmCode=069f415ec2ed4719847868654e1af518' target='_blank'>來啟動開通帳號</a>], 如果您已經開通, 請忽略本信, 謝謝

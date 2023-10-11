@@ -1,0 +1,48 @@
+﻿body {
+  background-color: #f5fffa;
+  /* font-family: ; */
+}
+
+/*消息輪播、輪播*/
+.carousel-item a {
+  text-align: center;
+  color: white;
+  text-decoration: none;
+}
+.carousel-item img {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+}
+/*Banner*/
+.categories > div {
+  height: 100%;
+  object-fit: cover;
+}
+.categories .category {
+    /* 背景圖片置中,不要重複 */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.indexTopColor {
+  background-color: black;
+}
+
+.textNoneLine {
+  text-decoration: none;
+  color: black;
+}
+
+.indexBottom {
+  color: #5b6772;
+  text-decoration: none;
+}
+
+.h3mb {
+  margin-top: 30px;
+}

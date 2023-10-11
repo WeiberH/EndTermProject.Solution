@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "PaymentMethod";
+}
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">首頁</a></li>
+            <li class="breadcrumb-item active" aria-current="page">聯絡我們</li>
+            <li class="breadcrumb-item active" aria-current="page">付款說明</li>
+        </ol>
+    </nav>
+</div>
+<hr />
+
+<h1 style="text-align: center"><span>付款說明</span></h1>
+<div class="container">
+    <p><span>目前提供以下付款方式：</span></p>
+    <ul>
+        <li class="textMb">線上刷卡 (一次付清 / 分3期零利率)</li>
+        <li class="textMb">ATM轉帳</li>
+        <li class="textMb">超商代碼付款</li>
+    </ul>
+    <h3 class="h3mb">
+        <strong>線上刷卡(Visa、Mastercard、JCB、中國銀聯)</strong>
+    </h3>
+    <p>
+        <span>
+            確認結帳後將跳轉至綠界金流付款頁面，線上刷卡的資料傳輸均採用SSL憑證加密，有效保護您的資料安全。
+            付款成功後將出現”完成訂單”結果頁，若付款過程因網路不穩未能完成頁面跳轉，可於【我的帳戶>我的訂單】檢查訂單狀態，狀態若為"待出貨"即表示付款成功，
+        </span><strong style="color: red">若顯示”尚未付款”則表示付款未成功，訂單將於下個工作日自動作廢取消，並返還原使用的點數與折扣碼資格，恕不另行通知，如有需要請重新購買。</strong>
+    </p>
+    <p>
+        <span>
+            支援以下銀行<span style="color: blue">3期分期零利率：</span>兆豐銀行、合作金庫、第一銀行、華南銀行、彰化銀行、上海銀行、富邦銀行、國泰世華、台灣企銀、台中銀行、匯豐銀行、華泰銀行、臺灣新光銀行、陽信銀行、三信商銀、聯邦銀行、遠東商銀、元大銀行、永豐銀行、玉山銀行、凱基銀行、星展銀行、台新銀行、日盛銀行、安泰銀行、中國信託、台灣樂天。
+        </span>
+    </p>
+    <h3 class="h3mb"><strong>ATM轉帳</strong></h3>
+    <p>
+        <span>確認結帳後將跳轉至綠界金流付款頁面，取得ATM轉入帳戶後請於3天內付款，逾期系統將自動取消訂單，恕不另行通知。</span>
+    </p>
+    <h3 class="h3mb"><strong>超商代碼付款</strong></h3>
+    <p>
+        <span>可至超商多媒體機台輸入代碼列印繳費單，或自行列印超商條碼至超商櫃台繳費。支援7-ELEVEN、全家、萊爾富、OK，全台10,000家便利超商，請於3天內付款，逾期系統將自動取消訂單，恕不另行通知。</span>
+    </p>
+    <h3 class="h3mb"><strong>貨到付款</strong></h3>
+    <p>
+        <span>
+            以現金方式支付，在未收到商品前，您不需要先付任何費用，收到商品之後，再將款項交給宅急便配送人員，方便有保障！如需取消訂單請<a href="https://line.me/zh-hant/" target="_blank">聯繫客服</a>協助。
+        </span>
+    </p>
+    <h3 class="h3mb"><strong>電子發票說明</strong></h3>
+    <p>
+        <span>
+            為響應環保，付款後將以電子發票形式開立並寄發email通知，恕不提供紙本發票。您可於結帳頁選擇您的發票儲存載具並填入資訊，一旦完成結帳恕無法補登或更改載具內容；如無使用個人載具者，發票將預設以會員載具儲存，由我們管理並上傳至財政部電子發票整合平台，當您中獎時將email通知您。
+            若您需要三聯式電子發票，請於結帳時勾選"三聯式發票"，填入公司統編與抬頭，確認付款後系統將以email方式提供PDF檔電子發票證明予您，此即為會計憑證，可透過此單據向公司報帳進行核銷。提醒您，三聯式發票一經開立將無法修改，請務必確認所提供的資訊無誤。
+        </span>
+    </p>
+</div>

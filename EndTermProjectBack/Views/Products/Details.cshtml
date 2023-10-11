@@ -1,0 +1,315 @@
+﻿@model EndTermProjectBack.Models.EFModels.Product
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nature</title>
+    <link rel="stylesheet" href="./css/bootstrap.css" />
+    <link rel="stylesheet" href="./css/site.css" />
+    <link rel="stylesheet" href="./css/_Layout.css" />
+    <script src="./js/bootstrap.bundle.js"></script>
+    <script src="js/jquery.3.6.4.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <style>
+        #picture {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            justify-content: center;
+        }
+
+        .product-info {
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: start;
+        }
+
+            .product-info .left {
+                width: 100%;
+                height: 550px;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: start;
+            }
+
+        .productPhoto {
+            object-fit: cover;
+            height: 450px;
+            padding-bottom: 3px;
+        }
+
+        .product-info .images {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            overflow-y: hidden;
+            overflow-x: auto;
+        }
+
+        .product-info li img {
+            width: 100px;
+            margin-left: 10px;
+        }
+
+        .product-info ul {
+            list-style: none;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            margin-bottom: 0px;
+        }
+
+        .brandname a {
+            color: black;
+            text-decoration: none;
+        }
+
+            .brandname a:hover {
+                text-decoration: underline;
+            }
+
+        .accordion-collapse {
+            display: block;
+            height: auto !important;
+            overflow: visible;
+        }
+
+        .accordion-body {
+            padding: 1rem;
+        }
+
+        .quantity {
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .accordion-button {
+            background-color: #ffffff;
+            color: #333;
+        }
+
+            .accordion-button:hover {
+                background-color: #ddd;
+            }
+
+            .accordion-button:focus {
+                box-shadow: 0 0 0 0.25rem rgba(220,220,220,0.5);
+            }
+
+        #middlepicture {
+            margin-top: 100px;
+            padding-right: 0px;
+            height: 300px;
+            object-fit: cover;
+            object-position: bottom;
+        }
+
+        @@media (max-width:768px) {
+            #breadcrumb {
+                margin-top: 350px;
+            }
+        }
+    </style>
+</head>
+
+<div class="container" id="picture">
+    <div class="row gx-5">
+        <!-- 商品照片 Begin -->
+        <div class="col-md-6">
+            <div class="product-info">
+                <div class="left">
+                    <img src="~/Images/@Model.Image"
+                         width="100%"
+                         class="productPhoto"
+                         alt="" />
+                    <div class="images">
+                        <ul>
+                            @foreach (var image in Model.ProductImages)
+                            {
+                                <li>
+                                    <img src="~/FileName/@image.FileName" alt="" />
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 商品照片End -->
+        <!-- 商品右邊 Begin -->
+        <div class="col-md-6 padding-left:20px mt-2">
+            <span class="brandname" style="font-size: medium; padding:2px; padding-top:10px">
+                @Model.Brand.Name
+            </span>
+            <h2 style="font-weight: bold" class="mt-2">@Model.Name</h2>
+            <p class="price"><strong style="font-size: larger">$@Model.Price</strong></p>
+            <div class="btn-group"
+                 role="group"
+                 aria-label="Basic radio toggle button group">
+                <input type="radio"
+                       class="btn-check"
+                       name="btnradio"
+                       id="btnradio1"
+                       autocomplete="off"
+                       checked />
+                <label class="btn btn-outline-secondary" for="btnradio1">@Model.Capacity.Name</label>
+            </div>
+            <br /><br />
+
+            <!-- 加入購物車按鈕及數量 Begin-->
+            <div class="container" style="max-width:none;">
+                <div class="row">
+                    <!-- 數量加減按鈕組 -->
+                    <div class="col-6 col-sm-6 mb-3 d-flex align-items-center" style="padding-left: 0px">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-outline-secondary" id="decrement">
+                                -
+                            </button>
+                            <span class="quantity" style="width:9rem; text-align: center; padding: 5px;" id="quantity"></span>
+                            <button type="button" class="btn btn-outline-secondary" id="increment">
+                                +
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 加入購物車按鈕 -->
+                    <div class="col-6 col-sm-6 mb-3 d-flex align-items-center justify-content-end">
+                        <button class="btn btn-dark" type="button">
+                            加入購物車
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 加入購物車按鈕及數量 End-->
+            <!-- 商品描述 Begin -->
+            <div class="accordion mt-3" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne"
+                                aria-expanded="true"
+                                aria-controls="collapseOne">
+                            商品介紹
+                        </button>
+                    </h2>
+                    <div id="collapseOne"
+                         class="accordion-collapse collapse"
+                         aria-labelledby="headingOne">
+                        <div class="accordion-body">
+                            @Model.Description
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo"
+                                aria-expanded="false"
+                                aria-controls="collapseTwo">
+                            用法&用途
+                        </button>
+                    </h2>
+                    <div id="collapseTwo"
+                         class="accordion-collapse collapse"
+                         aria-labelledby="headingTwo">
+                        <div class="accordion-body">
+                            @Model.Method
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseThree"
+                                aria-expanded="false"
+                                aria-controls="collapseThree">
+                            主要成分
+                        </button>
+                    </h2>
+                    <div id="collapseThree"
+                         class="accordion-collapse collapse"
+                         aria-labelledby="headingThree">
+                        <div class="accordion-body">
+                            @Model.Ingredient
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 商品描述 End -->
+            <!-- 商品右邊 End -->
+            <!-- 中間商品照
+            <div class="container">
+              <div class="row" style="padding-right: 0px;">
+                <img src="./img/護手霜/lume-wellness-_HXI367NQrs-unsplash.jpg" class="img-fluid" alt="..." id="middlepicture">
+              </div>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.product-info ul li img').click(function () {
+            var imgSrc = $(this).attr('src');
+            $('.productPhoto').attr('src', imgSrc);
+        })
+    })
+
+    let currentQty = 1;
+    let decrement = getElementId("decrement")
+    let increment = getElementId("increment")
+    setQty();
+
+    increment.addEventListener("click", function () {
+        updateQty(1);
+    });
+
+    decrement.addEventListener("click", function () {
+        updateQty(-1);
+    })
+
+    function getElementId(id) {
+        return (document.getElementById(id))
+    }
+
+    function setQty() {
+        let qty = getElementId("quantity");
+        qty.innerHTML = `<strong style = 'color:black'>${currentQty}</strong>`
+    }
+
+    function updateQty(n) {
+        currentQty = currentQty + n;
+
+        if (currentQty < 1) {
+            currentQty = 1;
+        }
+        setQty();
+    }
+</script>

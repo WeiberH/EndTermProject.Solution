@@ -1,0 +1,37 @@
+﻿@model EndTermProject.Solution.Models.ViewModels.FAQsVm.FAQPageVm
+
+@{
+    ViewBag.Title = "FAQFrontIndex";
+}
+
+<h2>FAQs</h2>
+
+<form method="get" action="@Url.Action("GetFAQs")">
+    <ul class="nav nav-tabs justify-content-center mb-3">
+        @foreach (var category in Model.Categories)
+        {
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.CurrentCategoryId == category.Id ? "active" : "")" 
+                   href="@Url.Action("FAQFrontIndex", "FAQs", new { categoryId = category.Id })">
+                        @category.Name</a>
+            </li>
+        }
+    </ul>
+
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+        @foreach (var faq in Model.FAQs)
+        {
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading-@faq.Id">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@faq.Id" aria-expanded="true" aria-controls="collapse-@faq.Id">
+                        Q: @faq.Question
+                    </button>
+                </h2>
+                <div id="collapse-@faq.Id" class="accordion-collapse collapse" aria-labelledby="heading-@faq.Id">
+                    <div class="accordion-body">
+                        A: @faq.Answer
+                    </div>
+                </div>
+            </div>
+        }
+    </div>

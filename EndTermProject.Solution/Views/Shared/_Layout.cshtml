@@ -1,0 +1,303 @@
+﻿
+<!DOCTYPE html>
+<html lang="zn-TW">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>River。純粹</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Layout.css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+
+    <div class="fixed-top">
+        @*消息輪播 begin*@
+
+        @{
+            var db = new EndTermProject.Solution.Models.EFModels.AppDbContext();
+            var carousel = db.TextCarousels;
+        }
+
+        <div id="carouselExampleControls"
+             class="carousel slide"
+             data-bs-ride="carousel">
+            <div class="carousel-inner">
+                @foreach (var item in carousel)
+                {
+                    if (item.Enabled == true)
+                    {
+                        <div class="carousel-item active data-bs-interval=1 indexTopColor">
+                            <a class="d-block indexTop"> @Html.DisplayFor(modelItem => item.Description)</a>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+        @*消息輪播 end*@
+
+        @*Banner begin*@
+        <div class="container-fluid categories gx-0"
+             style="background-color: white">
+            <div class="row align-items-center">
+
+                <!-- 左側(品牌介紹、官方Line) begin -->
+                <div class="col-lg-4 d-none d-sm-block">
+                    <!-- 品牌介紹 -->
+                    <a href="@Url.Action("AboutUs", "Home")"
+                       style="
+                text-decoration: none;
+                color: darkgray;
+                margin-right: 15px;
+                margin-left: 20%;
+              ">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             width="26"
+                             height="26"
+                             fill="currentColor"
+                             class="bi bi-0-circle"
+                             viewBox="0 0 384 512">
+                            <path d="M21.1 33.9c12.7-4.6 26.9-.7 35.5 9.6L320 359.6V64c0-17.7 14.3-32 32-32s32 14.3 32 32V448c0 13.5-8.4 25.5-21.1 30.1s-26.9 .7-35.5-9.6L64 152.4V448c0 17.7-14.3 32-32 32s-32-14.3-32-32V64C0 50.5 8.4 38.5 21.1 33.9z" />
+                        </svg>
+                    </a>
+
+                    <!-- 官方LINE -->
+                    <a href="https://line.me/zh-hant/"
+                       target="_blank"
+                       style="text-decoration: none; color: darkgray; margin-right: 15px">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             width="30"
+                             height="30"
+                             fill="currentColor"
+                             class="bi bi-line"
+                             viewBox="0 0 16 16">
+                            <path d="M8 0c4.411 0 8 2.912 8 6.492 0 1.433-.555 2.723-1.715 3.994-1.678 1.932-5.431 4.285-6.285 4.645-.83.35-.734-.197-.696-.413l.003-.018.114-.685c.027-.204.055-.521-.026-.723-.09-.223-.444-.339-.704-.395C2.846 12.39 0 9.701 0 6.492 0 2.912 3.59 0 8 0ZM5.022 7.686H3.497V4.918a.156.156 0 0 0-.155-.156H2.78a.156.156 0 0 0-.156.156v3.486c0 .041.017.08.044.107v.001l.002.002.002.002a.154.154 0 0 0 .108.043h2.242c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157Zm.791-2.924a.156.156 0 0 0-.156.156v3.486c0 .086.07.155.156.155h.562c.086 0 .155-.07.155-.155V4.918a.156.156 0 0 0-.155-.156h-.562Zm3.863 0a.156.156 0 0 0-.156.156v2.07L7.923 4.832a.17.17 0 0 0-.013-.015v-.001a.139.139 0 0 0-.01-.01l-.003-.003a.092.092 0 0 0-.011-.009h-.001L7.88 4.79l-.003-.002a.029.029 0 0 0-.005-.003l-.008-.005h-.002l-.003-.002-.01-.004-.004-.002a.093.093 0 0 0-.01-.003h-.002l-.003-.001-.009-.002h-.006l-.003-.001h-.004l-.002-.001h-.574a.156.156 0 0 0-.156.155v3.486c0 .086.07.155.156.155h.56c.087 0 .157-.07.157-.155v-2.07l1.6 2.16a.154.154 0 0 0 .039.038l.001.001.01.006.004.002a.066.066 0 0 0 .008.004l.007.003.005.002a.168.168 0 0 0 .01.003h.003a.155.155 0 0 0 .04.006h.56c.087 0 .157-.07.157-.155V4.918a.156.156 0 0 0-.156-.156h-.561Zm3.815.717v-.56a.156.156 0 0 0-.155-.157h-2.242a.155.155 0 0 0-.108.044h-.001l-.001.002-.002.003a.155.155 0 0 0-.044.107v3.486c0 .041.017.08.044.107l.002.003.002.002a.155.155 0 0 0 .108.043h2.242c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157H11.81v-.589h1.525c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157H11.81v-.589h1.525c.086 0 .155-.07.155-.156Z" />
+                        </svg>
+                    </a>
+                </div>
+                <!-- 左側(品牌介紹、官方Line) end -->
+                <!-- 品牌logo begin -->
+                <div class="col-lg-4">
+                    <img src="~/Images/輪播Banner.png"
+                         style="width: 100%;"
+                         href="#" />
+                </div>
+                <!-- 中間 品牌logo end -->
+                <!-- 右側 搜尋、會員、購物清單 begin -->
+                <div class="col-lg-4"
+                     style="display: flex; justify-content: flex-end">
+
+
+                    @{
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            <!-- 購物車 -->
+                            <a href="@Url.Action("CartInfo", "Cart")"
+                               style="text-decoration: none; color: darkgray; margin-right: 15px">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     width="28"
+                                     height="28"
+                                     fill="currentColor"
+                                     class="bi bi-bag"
+                                     viewBox="0 0 16 16">
+                                    <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
+                                </svg>
+                            </a>
+
+                            <!--我的訂單-->
+                            <li class="nav-item dropdown" style="list-style: none">
+                                <a class="nav-link dropdown-toggle"
+                                   href="@Url.Action("Checkout", "Cart")"
+                                   id="navbarDropdown"
+                                   role="button"
+                                   data-bs-toggle="dropdown"
+                                   aria-haspopup="true"
+                                   aria-expanded="false"
+                                   style="color: darkgray;margin-right:10px">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         width="26"
+                                         height="26"
+                                         fill="currentColor"
+                                         class="bi bi-bag"
+                                         viewBox="0 0 512 512">
+                                        <path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z" />
+                                    </svg>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="list-style: none">
+                                    <li>@Html.ActionLink("我的訂單", "Index", "Orders", new { area = "" }, new { @class = "nav-link" })</li>
+                                    <li>@Html.ActionLink("編輯會員資訊", "EditProfile", "Members", new { area = "" }, new { @class = "nav-link" })</li>
+                                </ul>
+                            </li>
+
+                            <!-- 會員 -->
+                            <p style="margin-right:5px">@(User.Identity.Name) </p>
+                            <a href="@Url.Action("Logout", "Members")"
+                               style="color:red; margin-right:10px">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     width="22"
+                                     height="22"
+                                     fill="currentColor"
+                                     viewBox="0 0 512 512">
+                                    <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z" />
+                                </svg>
+                            </a>
+
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Login", "Members")" style="text-decoration: none; color: darkgray; margin-right: 15px">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     width="30"
+                                     height="30"
+                                     fill="currentColor"
+                                     class="bi bi-people"
+                                     viewBox="0 0 16 16">
+                                    <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z" />
+                                </svg>
+                            </a>
+
+
+                        }
+                    }
+                </div>
+                <!-- 右側 搜尋、會員、購物清單 end -->
+            </div>
+        </div>
+        @*Banner end*@
+
+        @*導覽頁 begin*@
+        <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #e3f2fd;border-top:black solid 1px">
+            <div class="container">
+                @Html.ActionLink("River。純粹", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                        <li>@Html.ActionLink("最新消息", "News", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle"
+                               href="#"
+                               id="navbarDropdown"
+                               role="button"
+                               data-bs-toggle="dropdown"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                品牌
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="width: 200px ">
+                                <li>@Html.ActionLink("bamford", "FilterProductsByBrand", "ProductFilters", new { brandId = "7" }, new { @class = "nav-link" })</li>
+                                <li>@Html.ActionLink("Maison Louis Marie", "FilterProductsByBrand", "ProductFilters", new { brandId = "1" }, new { @class = "nav-link" })</li>
+                                <li>@Html.ActionLink("NEOM", "FilterProductsByBrand", "ProductFilters", new { brandId = "6" }, new { @class = "nav-link" })</li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle"
+                               href="#"
+                               id="navbarDropdown"
+                               role="button"
+                               data-bs-toggle="dropdown"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                香氛
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li>@Html.ActionLink("淡香精", "FilterProductsBySecondaryCategory", "ProductFilters", new { SecondaryCategoryId = "1" }, new { @class = "nav-link" })</li>
+                                <li>@Html.ActionLink("蠟燭", "FilterProductsBySecondaryCategory", "ProductFilters", new { SecondaryCategoryId = "3" }, new { @class = "nav-link" })</li>
+                                <li>@Html.ActionLink("擴香", "FilterProductsBySecondaryCategory", "ProductFilters", new { SecondaryCategoryId = "4" }, new { @class = "nav-link" })</li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle"
+                               href="#"
+                               id="navbarDropdown"
+                               role="button"
+                               data-bs-toggle="dropdown"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                身體
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li>@Html.ActionLink("護手霜", "FilterProductsBySecondaryCategory", "ProductFilters", new { SecondaryCategoryId = "5" }, new { @class = "nav-link" })</li>
+                                <li>@Html.ActionLink("乳液乳霜", "FilterProductsBySecondaryCategory", "ProductFilters", new { SecondaryCategoryId = "7" }, new { @class = "nav-link" })</li>
+                                <li>@Html.ActionLink("沐浴用品", "FilterProductsBySecondaryCategory", "ProductFilters", new { SecondaryCategoryId = "8" }, new { @class = "nav-link" })</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        @*導覽頁 end*@
+    </div>
+
+
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+
+    @*Footer begin*@
+    <div style="
+        background-color: white;
+        border-top: solid black 1px;
+        margin-top: 20px;
+      ">
+        <div class="container">
+            <div class="row" style="margin-top: 20px; text-align: center">
+                <div class="col-lg-3 com-md-6">
+                    <h3>關於我們</h3>
+                    <a href="@Url.Action("AboutUs", "Home")" class="indexBottom">認識River</a><br />
+                    <a href="@Url.Action("TermsOfService", "Home")" class="indexBottom">會員條款</a><br />
+                    <a href="@Url.Action("JoinUs", "Home")" class="indexBottom">加入我們</a>
+                </div>
+                <div class="col-lg-3 com-md-6">
+                    <h3>聯絡我們</h3>
+                    <a href="@Url.Action("FAQFrontIndex", "FAQs")" class="indexBottom">常見問題</a><br />
+                    <a href="@Url.Action("ReturnPolicy", "Home")" class="indexBottom">退換貨說明</a><br />
+                    <a href="@Url.Action("Shipping", "Home")" class="indexBottom">運送說明</a><br />
+                    <a href="@Url.Action("PaymentMethod", "Home")" class="indexBottom">付款說明</a>
+                </div>
+                <div class="col-lg-3 com-md-6">
+                    <h3>關注我們</h3>
+                    <a href="https://line.me/zh-hant/"
+                       target="_blank"
+                       class="indexBottom">Line</a><br />
+                    <a href="https://zh-tw.facebook.com/"
+                       target="_blank"
+                       class="indexBottom">Facebook</a><br />
+                    <a href="https://www.instagram.com/"
+                       target="_blank"
+                       class="indexBottom">Instagram</a><br />
+                    <a href="https://www.youtube.com/"
+                       target="_blank"
+                       class="indexBottom">Youtube</a>
+                </div>
+                <div class="col-lg-3 com-md-6">
+                    <img src="/Images/IndexBottomLogo.png" alt="顯示異常" style="width: 40%" />
+                </div>
+                <footer style="margin-top: 15px">
+                    <p>&copy; 2023 9/4 River. All Rights Reserved.</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    @*Footer end*@
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

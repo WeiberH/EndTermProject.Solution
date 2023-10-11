@@ -1,0 +1,77 @@
+﻿@model EndTermProjectBack.Models.EFModels.BannerCarousel
+
+
+@{
+    ViewBag.Title = "EditBannerCarousel";
+}
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">首頁</a></li>
+            <li class="breadcrumb-item active"><a href="@Url.Action("Index", "Home")"></a>前台頁面調整</li>
+            <li class="breadcrumb-item active"><a href="@Url.Action("BannerCarousel", "Carousel")"></a>Banner輪播</li>
+            <li class="breadcrumb-item active" aria-current="page">Banner輪播編輯</li>
+        </ol>
+    </nav>
+</div>
+<hr />
+
+@using (Html.BeginForm("EditBannerCarousel", "Carousel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="container">
+    <div class="row">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+
+        <div class="mb-3 col-lg-12">
+            @Html.LabelFor(model => model.CreatTime, "建立時間", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.CreatTime, new { htmlAttributes = new { @class = "form-control", Style = "background-color: #f2f2f2", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.CreatTime, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3 col-lg-6">
+            @Html.Label("上傳圖片", htmlAttributes: new { @class = "form-label col-md-2" })
+            <input type="file" name="ImageFile" id="ImageFile" class="form-control" />
+        </div>
+
+        <div class="mb-3 col-lg-6">
+            @Html.Label("原檔名", htmlAttributes: new { @class = "form-label col-md-2" })
+            @Html.TextBoxFor(model => model.Image, new { @class = "form-control", @readonly = "readonly" , Style = "background-color: #f2f2f2" })
+        </div>
+
+
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Headline, "標題", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.Headline, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Headline, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Description, "內容", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Enabled, "啟用狀態", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="checkbox">
+                @Html.EditorFor(model => model.Enabled)
+                @Html.ValidationMessageFor(model => model.Enabled, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="text-end">
+                <a href="@Url.Action("BannerCarousel", "Carousel")" class="btn btn-primary">上一頁</a>
+                <input type="submit" value="確認" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</div>
+}

@@ -1,0 +1,215 @@
+﻿
+@model IPagedList<EndTermProjectBack.Models.ViewModels.MemberVm>
+
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "MemberIndex";
+}
+<link rel="stylesheet" href="~/Content/PagedList.css">
+
+<style>
+    .custom-select {
+        position: relative;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        padding: 5px;
+        width: 100%;
+        border-radius: 5px;
+        height: 56%;
+        margin-top: 2px;
+        text-align: center;
+    }
+
+        .custom-select::after {
+            content: "\25BC";
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+    table {
+        width: 100%;
+    }
+
+        table td {
+            vertical-align: middle;
+        }
+</style>
+
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">首頁</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("MemberIndex", "Members")">會員維護</a></li>
+            <li class="breadcrumb-item active" aria-current="page">會員總覽</li>
+        </ol>
+    </nav>
+</div>
+<hr />
+
+@using (Html.BeginForm("MemberIndex", "Members", FormMethod.Get))
+{
+    <div class="container d-flex">
+        <div class="form-group row">
+            <div class="col-lg-2">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Account)
+                @Html.TextBox("account", "", new { @class = "form-control" })
+            </div>
+            <div class="col-lg-2">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Name)
+                @Html.TextBox("name", "", new { @class = "form-control" })
+            </div>
+            <div class="col-lg-2">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Email)
+                @Html.TextBox("email", "", new { @class = "form-control" })
+            </div>
+            <div class="col-lg-2">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Telephone)
+                @Html.TextBox("telephone", "", new { @class = "form-control" })
+            </div>
+            <div class="col-lg-1">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Gender)
+                <select class="custom-select" id="gender" name="gender">
+                    <option value="">全部</option>
+                    <option value="True">男性</option>
+                    <option value="False">女性</option>
+                </select>
+            </div>
+            <div class="col-lg-1">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Enabled)
+                <select class="custom-select" id="enabled" name="enabled">
+                    <option value="">全部</option>
+                    <option value="True">啟用</option>
+                    <option value="False">停用</option>
+                </select>
+            </div>
+            <div class="col-lg-1">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().IsConfirmed)
+                <select class="custom-select" id="isConfirmed" name="isConfirmed">
+                    <option value="">全部</option>
+                    <option value="True">已開通</option>
+                    <option value="False">未開通</option>
+                </select>
+            </div>
+            <div class="col-lg-1">
+                <br />
+                <button type="submit" class="btn btn-primary">篩選</button>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+<table class="table" style="text-align:center;margin:20px;">
+    <tr>
+        <th style="width:100px">
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Account)
+        </th>
+        <th style="width:150px">
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Name)
+        </th>
+        <th style="width:250px">
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Telephone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().DateofBirth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Enabled)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().IsConfirmed)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td style="text-align:start">
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telephone)
+            </td>
+            <td>
+                @item.DateofBirth.ToString("yyyy-MM-dd")
+            </td>
+            <td>
+                @if (item.Gender)
+                {
+                    <text>男性</text>
+                }
+                else
+                {
+                    <text>女性</text>
+                }
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Enabled)
+            </td>
+            <td>
+                @if (item.IsConfirmed == true)
+                {
+                    <text>開通</text>
+                }
+                else
+                {
+                    <text>未開通</text>
+                }
+            </td>
+            <td>
+                <button style="border: 1px solid #ccc; padding: 5px; text-align: center; text-decoration: none; color: #333; border-radius: 5px;" onclick="window.location.href='@Url.Action("EditMember", new { id = item.Id })'">編輯</button>
+            </td>
+
+        </tr>
+    }
+
+
+
+</table>
+
+<div class="pagination-container d-flex justify-content-center">
+    <ul class="pagination">
+        @Html.PagedListPager(Model, page => Url.Action("MemberIndex", new
+        {
+            page,
+            account = Request.QueryString["account"],
+            name = Request.QueryString["nameFilter"],
+            email = Request.QueryString["emailFilter"],
+            telephone = Request.QueryString["telephoneFilter"],
+            gender = Request.QueryString["genderFilter"],
+            enabled = Request.QueryString["enabledFilter"],
+            isConfirmed = Request.QueryString["isConfirmedFilter"]
+        }), new PagedListRenderOptions
+        {
+            DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+            DisplayLinkToLastPage = PagedListDisplayMode.Always,
+            DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+            DisplayLinkToNextPage = PagedListDisplayMode.Always,
+            DisplayLinkToIndividualPages = true,
+            MaximumPageNumbersToDisplay = 5
+        })
+
+    </ul>
+</div>

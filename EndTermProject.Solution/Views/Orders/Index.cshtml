@@ -1,0 +1,73 @@
+﻿@model IEnumerable<EndTermProject.Models.ViewModels.OrderVm>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@foreach (var item in Model)
+{
+    <div class="Container" style="margin: 20px 80px">
+        <div class="row" style="border: 1px solid rgb(234, 234, 234)">
+            <!-- <table class="table table-bordered" style="margin:0px"> -->
+            <table class="table table-bordered mb-0">
+                <tbody>
+                    <tr>
+                        <td data-id="@item.Id">
+                            <div class="container">
+                                <div class="row" style="cursor:pointer">
+                                    <div class="col-md-6">
+                                        @if (item.OrderItems.Any())
+                                        {
+                                            var firstOrderItem = item.OrderItems.First();
+                                            <img src="/Images/@Html.DisplayFor(modelItem => firstOrderItem.ProductImage)" alt="圖片異常" style="width: 180px" />
+                                            <div style="display: inline-block; margin: 10px">
+                                                <div><strong>@firstOrderItem.Brand</strong></div>
+                                                @firstOrderItem.ProductName <br />
+                                                x @firstOrderItem.Qty
+                                            </div>
+                                            <hr />
+                                            <div style="text-align: end">
+                                                商品小計 <span style="font-weight: bold">NT$ @firstOrderItem.SubTotal</span>
+                                            </div>
+                                        }
+                                        <div style="text-align: end">
+                                            運費 <span style="font-weight: bold" ;>NT$ 60</span>
+                                        </div>
+                                        <div style="text-align: end">
+                                            @Html.DisplayNameFor(model => model.Total)：<span style="font-weight: bold" ;>@item.Total </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div style="background-color: rgb(219, 219, 219);height: 100%;padding: 10px;">
+                                            <div style="margin-bottom: 5px">收件人資訊</div>
+                                            <ul style="list-style: none">
+                                                <li class="limb">@Html.DisplayNameFor(model => model.Receiver)：@item.Receiver</li>
+                                                <li class="limb">@Html.DisplayNameFor(model => model.TelePhone)：@item.TelePhone</li>
+                                                <li class="limb">@Html.DisplayNameFor(model => model.Email)：@item.Email</li>
+                                                <li class="limb">@Html.DisplayNameFor(model => model.Paytype)：@item.Paytype</li>
+                                                <li class="limb">@Html.DisplayNameFor(model => model.Status)：@item.Status</li>
+                                            </ul>
+                                            <hr />
+                                            <div style="margin-top: 10px">
+                                                <p>通知出貨後約 1 - 2 天寄達 | 提供追蹤</p>
+                                            </div>
+                                            <div style="margin-top: 10px">
+                                                <p>發票/收據開立後將寄至購買人地址</p>
+                                                @Html.DisplayNameFor(model => model.FullAddress)：@item.FullAddress
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- </table> -->
+        </div>
+    </div>
+}
+@section scripts{
+    <script src="~/JS/GetOrderItems.js"></script>
+}

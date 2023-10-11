@@ -1,0 +1,211 @@
+﻿@model EndTermProjectBack.Models.ViewModels.ProductViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+    /* CSS */
+    body {
+        font-family: 'Lato', 'Arial', sans-serif;
+        font-size: 16px;
+        color: #555;
+    }
+
+    .container {
+        background-color: #fff;
+        padding: 5px 20px;
+    }
+
+    .btn-primary {
+        background-color: #2c3e50;
+        border: none;
+        color: #fff;
+    }
+
+    .btn-danger {
+        background-color: #c0392b;
+        border: none;
+        color: #fff;
+    }
+
+    .btn-sm {
+        padding: 8px 10x;
+        font-size: 14px;
+    }
+
+    .table {
+        background-color: #fff;
+    }
+
+    .btn-container {
+        display: inline-block;
+    }
+
+    .btn-container {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+</style>
+
+@using (Html.BeginForm("Edit", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h5>編輯商品</h5>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="row">
+            <div class="col-lg-6 mb-3">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "form-label col-md-2" })
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "-- 輸入品名 --" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-lg-2 mb-3">
+                @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.Price, new { @class = "form-control", @placeholder = "-- 輸入價格 --", @type = "number" })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-lg-2 mb-3">
+                @Html.LabelFor(model => model.Stock, htmlAttributes: new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.Stock, new { @class = "form-control", @placeholder = "-- 輸入庫存 --", @type = "number" })
+                @Html.ValidationMessageFor(model => model.Stock, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-lg-2 mb-3">
+                @Html.LabelFor(model => model.Enabled, htmlAttributes: new { @class = "form-label" })
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Enabled)
+                    @Html.ValidationMessageFor(model => model.Enabled, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-3 mb-3">
+                @Html.LabelFor(model => model.BrandId, "品牌", htmlAttributes: new { @class = "form-label col-md-2" })
+                @Html.DropDownList("BrandId", null, htmlAttributes: new { @class = "form-select" })
+                @Html.ValidationMessageFor(model => model.BrandId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-lg-3 mb-3">
+                @Html.LabelFor(model => model.SecondaryCategoryId, "品類", htmlAttributes: new { @class = "form-label col-md-2" })
+                @Html.DropDownList("SecondaryCategoryId", null, htmlAttributes: new { @class = "form-select" })
+                @Html.ValidationMessageFor(model => model.SecondaryCategoryId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-lg-3 mb-3">
+                @Html.LabelFor(model => model.NoteId, "香調", htmlAttributes: new { @class = "form-label col-md-2" })
+                @Html.DropDownList("NoteId", null, htmlAttributes: new { @class = "form-select" })
+                @Html.ValidationMessageFor(model => model.NoteId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-lg-3 mb-3">
+                @Html.LabelFor(model => model.CapacityId, "容量", htmlAttributes: new { @class = "form-label col-md-2" })
+                @Html.DropDownList("CapacityId", null, htmlAttributes: new { @class = "form-select" })
+                @Html.ValidationMessageFor(model => model.CapacityId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="row">
+                <div class="col-lg-6 mb-3">
+                    <label for="formFile" class="form-label">上傳主圖(僅一張)</label>
+                    <input class="form-control" type="file" name="UploadedImages" id="file">
+                    @Html.ValidationMessageFor(model => model.UploadedImages, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-lg-6 mb-3">
+                    <label for="formFile" class="form-label">上傳副圖(可多選)</label>
+                    <input class="form-control" type="file" name="ProductImages" id="file" multiple />
+                    @Html.ValidationMessageFor(model => model.ProductImages, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "form-label col-md-2" })
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "-- 輸入商品介紹 --" } })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Method, htmlAttributes: new { @class = "form-label col-md-2" })
+            @Html.EditorFor(model => model.Method, new { htmlAttributes = new { @class = "form-control", @placeholder = "-- 輸入用法用途 --" } })
+            @Html.ValidationMessageFor(model => model.Method, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Ingredient, htmlAttributes: new { @class = "form-label col-md-2" })
+            @Html.EditorFor(model => model.Ingredient, new { htmlAttributes = new { @class = "form-control", @placeholder = "-- 輸入主要成分 --" } })
+            @Html.ValidationMessageFor(model => model.Ingredient, "", new { @class = "text-danger" })
+        </div>
+
+        @Html.HiddenFor(model => model.Image)
+
+        <div class="mb-3 d-flex justify-content-center mt-5">
+            <input type="submit" value="確定修改" class="btn btn-danger me-5" />
+            @Html.ActionLink("回上一頁", "Index", null, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const validImageTypes = ["image/jpg", "image/jpeg", "image/png"];
+        const maxSizeKB = 500;
+        const maxSizeBytes = maxSizeKB * 1024;
+
+        // 主圖驗證
+        const mainImageInput = document.querySelector("input[name='UploadedImages']");
+        if (mainImageInput) {
+            mainImageInput.addEventListener("change", function () {
+                for (let i = 0; i < mainImageInput.files.length; i++) {
+                    if (!validImageTypes.includes(mainImageInput.files[i].type) || mainImageInput.files[i].size > maxSizeBytes) {
+                        alert("上傳圖檔不正確或檔案太大，請上傳jpg/png格式且小於" + maxSizeKB + "KB的圖檔。");
+                        mainImageInput.value = ''; // 清空選取的檔案
+                        break;
+                    }
+                }
+            });
+        }
+
+        // 附圖驗證
+        const productImagesInput = document.querySelector("input[name='ProductImages']");
+        if (productImagesInput) {
+            productImagesInput.addEventListener("change", function () {
+                for (let i = 0; i < productImagesInput.files.length; i++) {
+                    if (!validImageTypes.includes(productImagesInput.files[i].type) || productImagesInput.files[i].size > maxSizeBytes) {
+                        alert("上傳圖檔不正確或檔案太大，請上傳jpg/png格式且小於" + maxSizeKB + "KB的圖檔。");
+                        productImagesInput.value = ''; // 清空選取的檔案
+                        break;
+                    }
+                }
+            });
+        }
+
+        const createButton = document.querySelector("input[type='submit'][value='確定修改']");
+
+        createButton.addEventListener("click", function (e) {
+            const mainImageInput = document.querySelector("input[name='UploadedImages']");
+            const productImagesInput = document.querySelector("input[name='ProductImages']");
+
+            if ((!mainImageInput.files || !mainImageInput.files.length) ||
+                (!productImagesInput.files || !productImagesInput.files.length)) {
+                alert("請確保您已上傳商品資訊，包含主圖和附圖。");
+                e.preventDefault();  // 阻止提交表單
+            }
+        });
+    });
+</script>

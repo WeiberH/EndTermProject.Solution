@@ -1,0 +1,502 @@
+﻿@model EndTermProject.Solution.Models.ViewModels.ProductFiltersVm
+
+@{
+    ViewBag.Title = "SecondaryCategoryIndex";
+}
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nature</title>
+    <link rel="stylesheet" href="./css/bootstrap.css" />
+    <link rel="stylesheet" href="./css/site.css" />
+    <link rel="stylesheet" href="./css/_Layout.css" />
+    <script src="./js/bootstrap.bundle.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <style>
+        body {
+            font-family: 微軟正黑體, Arial, sans-serif;
+        }
+
+        #picture {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* 篩選器 */
+        .filter-container {
+            width: 250px;
+            background-color: #fff;
+            padding-top: 10px;
+        }
+
+        .filter-group {
+            width: 250px;
+            margin-left: 50x;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-bottom: #ddd 1px solid;
+        }
+
+        /* 篩選器狀態 */
+        .filter-options {
+            display: none;
+            padding-left: 20px;
+            margin-bottom: 5px;
+        }
+
+        .expand-filter::before {
+            content: "▿";
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+        .collapse-filter::before {
+            margin-right: 5px;
+            cursor: pointer;
+            content: "▵";
+        }
+
+        /* 商品清單 */
+        .product-container {
+            width: 100%;
+            background-color: #fff;
+        }
+
+        .sort-options {
+            width: 98%;
+            text-align: right;
+            padding: 10px 10px 20px 0px;
+        }
+
+        /* 商品清單裡的卡片 */
+        .card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            width: 30%;
+            display: inline-block;
+            vertical-align: top;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+            .card a {
+                display: block;
+                cursor: pointer;
+                color: inherit;
+                text-decoration: none;
+            }
+
+            .card img {
+                max-width: 100%;
+                height: auto;
+                display: block;
+                margin: 0 auto;
+            }
+
+            .card .card-info {
+                padding-left: 10px;
+                text-align: left;
+            }
+
+            .card .name {
+                margin: 5px 0;
+                font-size: 1.2em;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .card .brand {
+                font-size: 0.9em;
+                color: #777;
+            }
+
+            .card .price {
+                width: 70px;
+                font-size: 1em;
+                font-weight: bold;
+            }
+
+            .card .heart {
+                cursor: pointer;
+                font-size: 1.5em;
+                color: black;
+                padding: 5px 10px;
+                border-radius: 50%;
+                transition: color 0.3s, background-color 0.3s;
+                text-align: right;
+            }
+
+                .card .heart:hover {
+                    color: red;
+                    background-color: transparent; /* 移除背景顏色 */
+                }
+
+        /* 當螢幕小於768px */
+        @@media (max-width: 768px) {
+            .filter-button {
+                display: block;
+                background-color: #eee;
+                padding: 10px;
+                text-align: center;
+                cursor: pointer;
+                font-weight: bold;
+                max-width: 85%;
+                margin: 0 auto;
+            }
+
+            .filter-container {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(255, 255, 255, 0.95);
+                z-index: 1000;
+                overflow-y: auto;
+                transform: translateY(-100%);
+                transition: transform 0.3s;
+            }
+
+                .filter-container.active {
+                    position: fixed;
+                    transform: translateY(0);
+                    top: 190px;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                }
+
+            .card {
+                margin: 5px;
+                width: 45%;
+            }
+
+                .card .name {
+                    margin: 5px 0;
+                    font-size: 1.1em;
+                }
+
+                .card .brand {
+                    font-size: 0.7em;
+                }
+
+            .container-fluid {
+                padding-left: 0px;
+                padding-right: 0px;
+                padding: 0 5px;
+            }
+
+            .row {
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+
+        @@media (min-width: 769px) {
+            .filter-button {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <form method="get" action="@Url.Action("FilterProductsBySecondaryCategory")">
+            <div class="row gx-5" id="picture">
+                <!--麵包屑 begin-->
+                <div class="col-md-12">
+                    <nav aria-label="breadcrumb" style="margin-left: 25px;">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active" aria-current="page">首頁</li>
+                            <li class="breadcrumb-item active" aria-current="page">品類</li>
+                            <li class="breadcrumb-item">
+                                <a href="@Url.Action("FilterProductsBySecondaryCategory", "ProductFilters", new { SecondaryCategoryId = Model.SecondaryCategoryId })"
+                                   style="text-decoration: none; color: inherit;">
+                                    @Model.SelectedSecondaryCategoryName
+                                </a>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+                <!--麵包屑 end-->
+                <!--品牌BN begin-->
+                <!--<div class="row gx-5">
+                    <img src="~/Images/@Model.BrandImage" class="img-fluid" alt="" style="max-width: 1200px; max-height: 400px;">
+                    <p>@Model.BrandDescription</p>
+                </div>-->
+                <!--品牌BN end-->
+                <!--篩選器 & 商品清單 begin-->
+                <div class="row gx-5">
+                    <!--篩選器 begin-->
+                    <div class="filter-button">點我篩選</div>
+                    <div class="col-lg-3 col-md-5">
+                        <div class="filter-container">
+                            <div class="filter-group">
+                                <h2 class="expand-filter" id="brandToggle" style="font-size: 20px">品牌</h2>
+                                <div class="filter-options" id="brandOptions">
+                                    @foreach (var brand in Model.Brands)
+                                    {
+                                        <label>
+                                            <input type="checkbox" name="SelectedBrandIds" value="@brand" @(Model.SelectedBrandIds != null && Model.SelectedBrandIds.Contains(brand) ? "checked" : "") />
+                                            @brand
+                                        </label>
+                                        <br>
+                                    }
+                                </div>
+                            </div>
+
+
+                            <div class="filter-group">
+                                <h2 class="expand-filter" id="noteToggle" style="font-size: 20px">香調</h2>
+                                <div class="filter-options" id="noteOptions">
+                                    @foreach (var note in Model.Notes)
+                                    {
+                                        <label>
+                                            <input type="checkbox" name="SelectedNoteIds" value="@note" @(Model.SelectedNoteIds != null && Model.SelectedNoteIds.Contains(note) ? "checked" : "") />
+                                            @note
+                                        </label>
+                                        <br>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="filter-group">
+                                <h2 class="expand-filter" id="capacityToggle" style="font-size: 20px">容量</h2>
+                                <div class="filter-options" id="capacityOptions">
+                                    @foreach (var capacity in Model.Capacities)
+                                    {
+                                        <label>
+                                            <input type="checkbox" name="SelectedCapacityIds" value="@capacity" @(Model.SelectedCapacityIds != null && Model.SelectedCapacityIds.Contains(capacity) ? "checked" : "") />
+                                            @capacity
+                                        </label>
+                                        <br>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="filter-group">
+                                <h2 class="expand-filter" id="priceToggle" style="font-size: 20px">價格</h2>
+                                <div class="filter-options" id="priceOptions">
+                                    <label for="lowPrice">最低價：</label><br>
+                                    <input type="text" id="lowPrice" name="LowPrice" placeholder="輸入最低價格" style="width: 200px" value="@Model.LowPrice">
+                                    <br>
+                                    <label for="highPrice">最高價：</label><br>
+                                    <input type="text" id="highPrice" name="HighPrice" placeholder="輸入最高價格" style="width: 200px" value="@Model.HighPrice">
+                                </div>
+                            </div>
+                            <input type="hidden" name="SecondaryCategoryId" value="@Model.SecondaryCategoryId" />
+                            <button id="submitFilter" style="display: block; margin: 0 auto; background-color: #fff; color: #333; padding: 5px 15px; border: 2px solid #ccc; cursor: pointer; font-weight: bold;">確認</button>
+                        </div>
+                    </div>
+                    <!--篩選器 end-->
+                    <!--商品清單 begin-->
+                    <div class="col-lg-9 col-md-7">
+                        <div class="product-container">
+                            <div class="sort-options">
+                                <label for="priceSort">價格排序</label>
+                                <select id="priceSort" name="PriceSort" onchange="this.form.submit()">
+                                    <option value="">建議</option>
+                                    <option value="asc" @(Model.PriceSort == "asc" ? "selected" : "")>▵由低到高 </option>
+                                    <option value="desc" @(Model.PriceSort == "desc" ? "selected" : "")>▿由高到低</option>
+                                </select>
+                            </div>
+
+                            @if (Model.Products == null || !Model.Products.Any())
+                            {
+                                <!-- 如果沒有商品，則顯示此訊息 -->
+                                <div class="alert alert-primary" role="alert" style="width: 80%; margin: auto; padding: 20px; font-size: 18px; font-weight: bold; text-align: center; color: darkblue;">
+                                    查無該條件商品，請勾選或輸入其他條件，並再次按下確認！
+                                </div>
+                            }
+                            else
+                            {
+                                foreach (var product in Model.Products.Where(p => p.Enabled))
+                                {
+                                    <div class="card">
+                                        <a href="@Url.Action("Details", "Products", new { id = product.Id })">
+                                            <!-- 商品詳細資訊的連結 -->
+                                            <img src="~/Images/@product.Image" alt="nopic">
+                                            <div class="card-info">
+                                                <div class="name">@product.Name</div>
+                                                <div class="brand">@product.Brand.Name</div>
+                                                <div class="price">$@product.Price</div>
+                                            </div>
+                                        </a>
+                                        <div class="heart">@*&#10084;*@</div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                        <!--商品清單 end-->
+
+                    </div>
+                    <!--篩選器 & 商品清單 end-->
+
+                </div>
+        </form>
+    </div>
+</body>
+
+
+
+<script>
+    // 獲取展開/收起按鈕和篩選項容器
+    const brandToggle = document.getElementById("brandToggle");
+    const brandOptions = document.getElementById("brandOptions");
+    const noteToggle = document.getElementById("noteToggle");
+    const noteOptions = document.getElementById("noteOptions");
+    const capacityToggle = document.getElementById("capacityToggle");
+    const capacityOptions = document.getElementById("capacityOptions");
+    const priceToggle = document.getElementById("priceToggle");
+    const priceOptions = document.getElementById("priceOptions");
+    const lowPriceInput = document.getElementById("lowPrice");
+    const highPriceInput = document.getElementById("highPrice");
+    const submitButton = document.getElementById("submitFilter");
+
+    // 添加事件處理程序展開/收起篩選項
+    brandToggle.addEventListener("click", () => {
+        toggleFilterVisibility(brandOptions, brandToggle);
+    });
+
+    noteToggle.addEventListener("click", () => {
+        toggleFilterVisibility(noteOptions, noteToggle);
+    });
+
+    capacityToggle.addEventListener("click", () => {
+        toggleFilterVisibility(capacityOptions, capacityToggle);
+    });
+
+    priceToggle.addEventListener("click", () => {
+        toggleFilterVisibility(priceOptions, priceToggle);
+    });
+
+    // 初始化篩選項的狀態
+    updatePriceInputs();
+
+    // 展開/收起篩選項的函數
+    function toggleFilterVisibility(options, toggleButton) {
+        if (options.style.display === "none" || options.style.display === "") {
+            options.style.display = "block";
+            toggleButton.classList.remove("expand-filter");
+            toggleButton.classList.add("collapse-filter");
+        } else {
+            options.style.display = "none";
+            toggleButton.classList.remove("collapse-filter");
+            toggleButton.classList.add("expand-filter");
+        }
+    }
+
+    // 更新價格輸入框的值
+    function updatePriceInputs() {
+        const lowPrice = parseFloat(lowPriceInput.value);
+        const highPrice = parseFloat(highPriceInput.value);
+
+        // 更新顯示值
+        lowPriceInput.value = isNaN(lowPrice) ? "" : lowPrice.toFixed(0);
+        highPriceInput.value = isNaN(highPrice) ? "" : highPrice.toFixed(0);
+    }
+
+    // 套用篩選的函数（示例，實際應用須根據需求修改）
+    function applyFilters() {
+        const selectedBrands = getSelectedCheckboxes("brand");
+        const selectedNotes = getSelectedCheckboxes("note");
+        const selectedCapacities = getSelectedCheckboxes("capacity");
+        const lowPrice = parseFloat(lowPriceInput.value);
+        const highPrice = parseFloat(highPriceInput.value);
+
+        // 在這裡執行篩選動作，使用選擇的條件和價格範圍進行篩選
+        console.log("選擇的品類：", selectedBrands);
+        console.log("選擇的香調：", selectedNotes);
+        console.log("選擇的容量：", selectedCapacities);
+        console.log("輸入的最低價格: $", lowPrice);
+        console.log("輸入的最高價格: $", highPrice);
+
+        // 更新篩選結果
+        updateFilteredResults();
+    }
+
+    // 獲取選擇的複選框的值
+    function getSelectedCheckboxes(name) {
+        const checkboxes = document.querySelectorAll(`input[name="${name}"]:checked`);
+        return Array.from(checkboxes).map(checkbox => checkbox.value);
+    }
+
+    // 更新篩選結果的函數（示例，實際應用須根據需求修改）
+    function updateFilteredResults() {
+        //在這裡執行篩選操作 用選擇條件和價格範圍進行篩選
+        //更新頁面上的商品列表或其他相應的操作
+        console.log("執行篩選操作...");
+    }
+
+    function initializeFilterState() {
+        const filterSections = [
+            { toggle: brandToggle, options: brandOptions },
+            { toggle: noteToggle, options: noteOptions },
+            { toggle: capacityToggle, options: capacityOptions },
+            { toggle: priceToggle, options: priceOptions },
+            // ... 你可以繼續添加其他的篩選區塊
+        ];
+
+        filterSections.forEach(section => {
+            // 檢查是否有選中的複選框
+            const hasCheckedCheckboxes = [...section.options.querySelectorAll('input[type="checkbox"]')].some(cb => cb.checked);
+
+            // 檢查是否有非空的文本框
+            const hasFilledTextboxes = [...section.options.querySelectorAll('input[type="text"]')].some(tb => tb.value.trim() !== "");
+
+            // 如果有選中的複選框或非空的文本框，展開該部分
+            if (hasCheckedCheckboxes || hasFilledTextboxes) {
+                section.options.style.display = "block";
+                section.toggle.classList.remove("expand-filter");
+                section.toggle.classList.add("collapse-filter");
+            }
+        });
+    }
+
+    // 在頁面載入時執行此函數
+    document.addEventListener("DOMContentLoaded", initializeFilterState);
+</script>
+
+<script>
+    $(document).ready(function () {
+        $(".filter-button").click(function (event) {
+            $(".filter-container").toggleClass("active");
+            event.stopPropagation(); // 防止document的click事件被觸發
+        });
+
+        // 任何地方點擊都會關閉 filter-container
+        $(document).click(function (event) {
+            if (!$(event.target).closest('.filter-container, .filter-button').length) {
+                $(".filter-container").removeClass("active");
+            }
+        });
+
+        $(".filter-container").click(function (event) {
+            event.stopPropagation(); // 確保當在filter-container內部點擊時不會關閉它
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('.name').each(function () {
+            var $this = $(this);
+            if ($this[0].scrollWidth > $this.innerWidth()) {
+                // 文本已被截斷
+                // 如果需要進行其他操作（例如添加提示），可以在此處添加
+                $this.attr('title', $this.text()); // 當滑鼠懸停時，顯示完整品名
+            }
+        });
+    });
+</script>
